@@ -145,11 +145,28 @@ export function ExpeditionDetail({
 
           {/* Actions */}
           {isCompleted ? (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded text-center">
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded text-center font-medium">
               ✓ You've completed this expedition!
+              <p className="text-sm mt-1 text-green-600">
+                You earned {expedition.points} points from this adventure.
+              </p>
             </div>
           ) : isUnlocked ? (
-            showCompleteForm ? (
+            <>
+              {/* Unlocked Status Info */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🎯</span>
+                  <div>
+                    <h4 className="font-semibold text-blue-900 mb-1">Expedition Unlocked</h4>
+                    <p className="text-sm text-blue-700">
+                      You've committed to this adventure! Visit the location and submit proof to earn <strong>{expedition.points} points</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {showCompleteForm ? (
               <div className="space-y-4">
                 <h3 className="font-semibold text-gray-900">Complete Your Expedition</h3>
                 
@@ -205,19 +222,42 @@ export function ExpeditionDetail({
             ) : (
               <button
                 onClick={() => setShowCompleteForm(true)}
-                className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+                className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
               >
-                Mark as Completed
+                ✅ I Visited This Place - Submit Proof
               </button>
-            )
+            )}
+            </>
           ) : (
-            <button
-              onClick={handleUnlock}
-              disabled={unlocking}
-              className="w-full px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 disabled:opacity-50"
-            >
-              {unlocking ? 'Unlocking...' : '🔓 Unlock This Expedition'}
-            </button>
+            <>
+              {/* Unlock Info */}
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🔓</span>
+                  <div>
+                    <h4 className="font-semibold text-orange-900 mb-1">Ready to explore?</h4>
+                    <p className="text-sm text-orange-700 mb-2">
+                      <strong>Step 1:</strong> Unlock this expedition to add it to your adventure list.
+                    </p>
+                    <p className="text-sm text-orange-700">
+                      <strong>Step 2:</strong> Visit the location in real life, then come back to submit proof and earn <strong>{expedition.points} points</strong>!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <button
+                onClick={handleUnlock}
+                disabled={unlocking}
+                className="w-full px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 disabled:opacity-50 transition-colors"
+              >
+                {unlocking ? 'Unlocking...' : '🔓 Unlock & Add to My Adventures'}
+              </button>
+              
+              <p className="text-xs text-gray-500 text-center mt-2">
+                No points awarded yet - you'll earn points when you complete it
+              </p>
+            </>
           )}
         </div>
       </div>

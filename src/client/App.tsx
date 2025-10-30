@@ -6,6 +6,7 @@ import { ExpeditionCard } from './components/ExpeditionCard';
 import { ExpeditionMap } from './components/ExpeditionMap';
 import { ExpeditionDetail } from './components/ExpeditionDetail';
 import { UserProfile } from './components/UserProfile';
+import { FirstTimeHelp } from './components/FirstTimeHelp';
 import type { Expedition, ExpeditionTag } from '../shared/types/expeditions';
 
 type View = 'map' | 'list';
@@ -22,11 +23,21 @@ export const App = () => {
 
   const [showForm, setShowForm] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const [selectedExpedition, setSelectedExpedition] = useState<Expedition | null>(null);
   const [expeditionStatus, setExpeditionStatus] = useState<{
     isUnlocked: boolean;
     isCompleted: boolean;
   } | null>(null);
+
+  // Show help on first visit
+  useEffect(() => {
+    const hasSeenHelp = localStorage.getItem('subvoyager_seen_help');
+    if (!hasSeenHelp && !initLoading && username) {
+      setShowHelp(true);
+      localStorage.setItem('subvoyager_seen_help', 'true');
+    }
+  }, [initLoading, username]);
 
   // Load expedition status when selected
   useEffect(() => {
@@ -104,17 +115,26 @@ export const App = () => {
               <h1 className="text-2xl font-bold">🗺️ SubVoyager</h1>
               <p className="text-xs text-orange-100">Discover hidden gems in your city</p>
             </div>
-            <button
-              onClick={() => setShowProfile(true)}
-              className="flex items-center gap-2 bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-colors"
-            >
-              <div className="text-right">
-                <div className="text-sm font-semibold">{username}</div>
-                <div className="text-xs text-orange-100">
-                  Level {userProfile?.level} • {userProfile?.totalPoints} pts
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowHelp(true)}
+                className="bg-white bg-opacity-20 hover:bg-opacity-30 p-2 rounded-lg transition-colors"
+                title="How it works"
+              >
+                <span className="text-lg">❓</span>
+              </button>
+              <button
+                onClick={() => setShowProfile(true)}
+                className="flex items-center gap-2 bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-colors"
+              >
+                <div className="text-right">
+                  <div className="text-sm font-semibold">{username}</div>
+                  <div className="text-xs text-orange-100">
+                    Level {userProfile?.level} • {userProfile?.totalPoints} pts
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
 
           {/* View Toggle */}
@@ -238,6 +258,8 @@ export const App = () => {
       {showProfile && userProfile && (
         <UserProfile profile={userProfile} onClose={() => setShowProfile(false)} />
       )}
+
+      {showHelp && <FirstTimeHelp onClose={() => setShowHelp(false)} />}
 
       {selectedExpedition && expeditionStatus && (
         <ExpeditionDetail
