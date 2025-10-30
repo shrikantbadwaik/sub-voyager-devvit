@@ -9,19 +9,18 @@ export const createPost = async () => {
   return await reddit.submitCustomPost({
     splash: {
       // Splash Screen Configuration
-      appDisplayName: 'subvoyager',
+      appDisplayName: 'SubVoyager',
       backgroundUri: 'default-splash.png',
-      buttonLabel: 'Tap to Start',
-      description: 'An exciting interactive experience',
+      buttonLabel: 'Start Exploring',
+      description: 'Discover hidden gems and local expeditions in your city',
       entryUri: 'index.html',
-      heading: 'Welcome to the Game!',
+      heading: '🗺️ SubVoyager',
       appIconUri: 'default-icon.png',
     },
     postData: {
-      gameState: 'initial',
-      score: 0,
+      appVersion: '1.0.0-mvp',
     },
     subredditName: subredditName,
-    title: 'subvoyager',
+    title: '🗺️ SubVoyager - Discover Hidden Gems in Your City',
   });
 };
