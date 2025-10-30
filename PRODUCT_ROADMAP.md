@@ -265,6 +265,11 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Top explorers per city
 - **Category Leaderboards**
   - Food experts, photo spot hunters, culture enthusiasts
+- **Completion Rate Leaderboard**
+  - "Top explorers who complete what they unlock"
+  - Metric: (completed / unlocked) × 100%
+  - Encourages finishing started expeditions
+  - Minimum 5 unlocks to qualify
 - **Leaderboard Rewards**
   - Top 3 get special flair
   - Monthly winner gets featured post
@@ -432,6 +437,12 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Average rating shown on card
   - Reviews visible in detail view
   - Filter by rating
+- **Photo Galleries**
+  - See all completion photos from other users
+  - Gallery view in expedition detail
+  - Sort by recency or popularity
+  - Like/react to user photos
+  - "Featured photo" selected by community votes
 - **Quality Control**
   - Low-rated expeditions flagged for review
   - Creator notified of low ratings
@@ -466,12 +477,19 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 #### 9. Advanced Gamification
 - **Quests & Challenges**
   - Time-limited challenges: "Complete 5 food expeditions this week"
+  - Unlock challenges: "Unlock 5 expeditions this week"
   - Progressive quests: "Complete 1 in each city"
   - Hidden achievements
   - Quest rewards (bonus points, exclusive badges)
+- **Time-Limited Bonuses**
+  - Complete within 7 days of unlock: +5 bonus points
+  - Complete within 30 days of unlock: +2 bonus points
+  - Visual countdown timer on unlocked expeditions
+  - "Expired" status if not completed within 90 days (can re-unlock)
 - **Streaks**
   - Daily login streak
   - Weekly completion streak
+  - Completion chain: Complete 3 unlocked expeditions in a row → bonus badge
   - Streak rewards (multipliers)
 - **Seasonal Events**
   - Halloween special expeditions
