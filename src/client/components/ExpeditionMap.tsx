@@ -1,3 +1,4 @@
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import type { Expedition } from '../../shared/types/expeditions';
 import 'leaflet/dist/leaflet.css';
@@ -41,17 +42,17 @@ export function ExpeditionMap({
           <Marker
             key={expedition.id}
             position={[expedition.location.coordinates.lat, expedition.location.coordinates.lng]}
-            eventHandlers={{
-              click: () => onMarkerClick(expedition),
-            }}
           >
             <Popup>
               <div className="p-2">
                 <h3 className="font-bold text-sm mb-1">{expedition.title}</h3>
                 <p className="text-xs text-gray-600 mb-2">{expedition.location.address}</p>
                 <button
-                  onClick={() => onMarkerClick(expedition)}
-                  className="text-xs bg-orange-600 text-white px-2 py-1 rounded"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onMarkerClick(expedition);
+                  }}
+                  className="text-xs bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded transition-colors"
                 >
                   View Details
                 </button>
