@@ -26,23 +26,18 @@ type ExpeditionMapProps = {
 export function ExpeditionMap({
   expeditions,
   onMarkerClick,
-  center = [19.0760, 72.8777], // Default to Mumbai
+  center = [19.076, 72.8777], // Default to Mumbai
   zoom = 12,
 }: ExpeditionMapProps) {
   return (
     <div className="h-full w-full">
-      <MapContainer
-        center={center}
-        zoom={zoom}
-        className="h-full w-full"
-        scrollWheelZoom={true}
-      >
+      <MapContainer center={center} zoom={zoom} className="h-full w-full" scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {expeditions.map(expedition => (
+        {expeditions.map((expedition) => (
           <Marker
             key={expedition.id}
             position={[expedition.location.coordinates.lat, expedition.location.coordinates.lng]}
@@ -68,4 +63,3 @@ export function ExpeditionMap({
     </div>
   );
 }
-

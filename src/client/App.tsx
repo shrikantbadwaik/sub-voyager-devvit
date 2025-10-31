@@ -16,10 +16,11 @@ export const App = () => {
   const [view, setView] = useState<View>('map');
   const [selectedCity, setSelectedCity] = useState<string>('');
   const [selectedTag, setSelectedTag] = useState<ExpeditionTag | ''>('');
-  const { expeditions, loading: expeditionsLoading, reload } = useExpeditions(
-    selectedCity || undefined,
-    selectedTag || undefined
-  );
+  const {
+    expeditions,
+    loading: expeditionsLoading,
+    reload,
+  } = useExpeditions(selectedCity || undefined, selectedTag || undefined);
 
   const [showForm, setShowForm] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -168,7 +169,7 @@ export const App = () => {
         <div className="flex gap-3 overflow-x-auto">
           <select
             value={selectedCity}
-            onChange={e => setSelectedCity(e.target.value)}
+            onChange={(e) => setSelectedCity(e.target.value)}
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
             <option value="">All Cities</option>
@@ -181,7 +182,7 @@ export const App = () => {
 
           <select
             value={selectedTag}
-            onChange={e => setSelectedTag(e.target.value as ExpeditionTag | '')}
+            onChange={(e) => setSelectedTag(e.target.value as ExpeditionTag | '')}
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
             <option value="">All Tags</option>
@@ -233,14 +234,17 @@ export const App = () => {
             onMarkerClick={handleExpeditionClick}
             center={
               expeditions.length > 0
-                ? [expeditions[0]!.location.coordinates.lat, expeditions[0]!.location.coordinates.lng]
-                : [19.0760, 72.8777]
+                ? [
+                    expeditions[0]!.location.coordinates.lat,
+                    expeditions[0]!.location.coordinates.lng,
+                  ]
+                : [19.076, 72.8777]
             }
           />
         ) : (
           <div className="h-full overflow-y-auto p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
-              {expeditions.map(expedition => (
+              {expeditions.map((expedition) => (
                 <ExpeditionCard
                   key={expedition.id}
                   expedition={expedition}
@@ -253,7 +257,9 @@ export const App = () => {
       </main>
 
       {/* Modals */}
-      {showForm && <ExpeditionForm onSuccess={handleFormSuccess} onCancel={() => setShowForm(false)} />}
+      {showForm && (
+        <ExpeditionForm onSuccess={handleFormSuccess} onCancel={() => setShowForm(false)} />
+      )}
 
       {showProfile && userProfile && (
         <UserProfile profile={userProfile} onClose={() => setShowProfile(false)} />

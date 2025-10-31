@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import type { ExpeditionTag, ExpeditionDifficulty, Coordinates } from '../../shared/types/expeditions';
+import type {
+  ExpeditionTag,
+  ExpeditionDifficulty,
+  Coordinates,
+} from '../../shared/types/expeditions';
 import { createExpedition, imageToBase64 } from '../utils/api';
 
 type ExpeditionFormProps = {
@@ -83,13 +87,11 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
             <input
               type="text"
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
               required
               maxLength={100}
               placeholder="e.g., Hidden Rooftop Café with City Views"
@@ -99,12 +101,10 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Description *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
             <textarea
               value={description}
-              onChange={e => setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               required
               maxLength={500}
               rows={4}
@@ -116,12 +116,10 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
           {/* Location */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                City *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
               <select
                 value={city}
-                onChange={e => setCity(e.target.value)}
+                onChange={(e) => setCity(e.target.value)}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
@@ -134,12 +132,10 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Tag *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Tag *</label>
               <select
                 value={tag}
-                onChange={e => setTag(e.target.value as ExpeditionTag)}
+                onChange={(e) => setTag(e.target.value as ExpeditionTag)}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
@@ -155,13 +151,11 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
 
           {/* Address */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Address *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Address *</label>
             <input
               type="text"
               value={address}
-              onChange={e => setAddress(e.target.value)}
+              onChange={(e) => setAddress(e.target.value)}
               required
               placeholder="e.g., Linking Road, Bandra West"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -171,14 +165,12 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
           {/* Coordinates */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Latitude *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Latitude *</label>
               <input
                 type="number"
                 step="any"
                 value={lat}
-                onChange={e => setLat(e.target.value)}
+                onChange={(e) => setLat(e.target.value)}
                 required
                 placeholder="19.0760"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -186,14 +178,12 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Longitude *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Longitude *</label>
               <input
                 type="number"
                 step="any"
                 value={lng}
-                onChange={e => setLng(e.target.value)}
+                onChange={(e) => setLng(e.target.value)}
                 required
                 placeholder="72.8777"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -203,16 +193,14 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
 
           {/* Difficulty */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Difficulty *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Difficulty *</label>
             <div className="flex gap-4">
               <label className="flex items-center">
                 <input
                   type="radio"
                   value="easy"
                   checked={difficulty === 'easy'}
-                  onChange={e => setDifficulty(e.target.value as ExpeditionDifficulty)}
+                  onChange={(e) => setDifficulty(e.target.value as ExpeditionDifficulty)}
                   className="mr-2"
                 />
                 Easy (10 pts)
@@ -222,7 +210,7 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
                   type="radio"
                   value="medium"
                   checked={difficulty === 'medium'}
-                  onChange={e => setDifficulty(e.target.value as ExpeditionDifficulty)}
+                  onChange={(e) => setDifficulty(e.target.value as ExpeditionDifficulty)}
                   className="mr-2"
                 />
                 Medium (20 pts)
@@ -232,7 +220,7 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
                   type="radio"
                   value="hard"
                   checked={difficulty === 'hard'}
-                  onChange={e => setDifficulty(e.target.value as ExpeditionDifficulty)}
+                  onChange={(e) => setDifficulty(e.target.value as ExpeditionDifficulty)}
                   className="mr-2"
                 />
                 Hard (30 pts)
@@ -242,9 +230,7 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
 
           {/* Photo */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Photo *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Photo *</label>
             <input
               type="file"
               accept="image/*"
@@ -253,11 +239,7 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             {photo && (
-              <img
-                src={photo}
-                alt="Preview"
-                className="mt-2 w-full h-48 object-cover rounded-md"
-              />
+              <img src={photo} alt="Preview" className="mt-2 w-full h-48 object-cover rounded-md" />
             )}
           </div>
 
@@ -284,4 +266,3 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
     </div>
   );
 }
-

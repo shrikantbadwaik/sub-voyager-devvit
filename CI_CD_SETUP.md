@@ -20,13 +20,13 @@ SubVoyager uses GitHub Actions for automated building, testing, and deployment. 
 
 ### Workflows Included
 
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| **CI - Build and Test** | Push/PR to main/develop | Builds and validates code |
-| **Code Quality** | Push/PR to main/develop | Runs linters and type checks |
-| **Dependency Review** | Pull requests | Security audit for dependencies |
-| **Deploy to Staging** | Push to develop | Prepares staging deployment |
-| **Deploy to Production** | Release or manual | Production deployment |
+| Workflow                 | Trigger                 | Purpose                         |
+| ------------------------ | ----------------------- | ------------------------------- |
+| **CI - Build and Test**  | Push/PR to main/develop | Builds and validates code       |
+| **Code Quality**         | Push/PR to main/develop | Runs linters and type checks    |
+| **Dependency Review**    | Pull requests           | Security audit for dependencies |
+| **Deploy to Staging**    | Push to develop         | Prepares staging deployment     |
+| **Deploy to Production** | Release or manual       | Production deployment           |
 
 ---
 
@@ -35,10 +35,12 @@ SubVoyager uses GitHub Actions for automated building, testing, and deployment. 
 ### 1. CI - Build and Test (`ci.yml`)
 
 **Triggers:**
+
 - Push to `main` or `develop`
 - Pull requests to `main` or `develop`
 
 **What it does:**
+
 ```
 ✅ Checks out code
 ✅ Sets up Node.js 22.x
@@ -58,10 +60,12 @@ SubVoyager uses GitHub Actions for automated building, testing, and deployment. 
 ### 2. Code Quality (`code-quality.yml`)
 
 **Triggers:**
+
 - Push to `main` or `develop`
 - Pull requests to `main` or `develop`
 
 **What it does:**
+
 ```
 ✅ Runs ESLint (with error reporting)
 ✅ Checks Prettier formatting
@@ -76,9 +80,11 @@ SubVoyager uses GitHub Actions for automated building, testing, and deployment. 
 ### 3. Dependency Review (`dependency-review.yml`)
 
 **Triggers:**
+
 - Pull requests to `main` or `develop`
 
 **What it does:**
+
 ```
 ✅ Reviews dependency changes
 ✅ Checks for known vulnerabilities
@@ -93,10 +99,12 @@ SubVoyager uses GitHub Actions for automated building, testing, and deployment. 
 ### 4. Deploy to Staging (`deploy-staging.yml`)
 
 **Triggers:**
+
 - Push to `develop` branch
 - Manual workflow dispatch
 
 **What it does:**
+
 ```
 ✅ Builds the application
 ✅ Prepares for deployment
@@ -110,10 +118,12 @@ SubVoyager uses GitHub Actions for automated building, testing, and deployment. 
 ### 5. Deploy to Production (`deploy-production.yml`)
 
 **Triggers:**
+
 - GitHub Release published
 - Manual workflow dispatch (requires confirmation)
 
 **What it does:**
+
 ```
 ✅ Validates deployment confirmation
 ✅ Runs full build and checks
@@ -187,17 +197,20 @@ npm run build         # Build
 ### Creating a Pull Request
 
 1. Create a feature branch:
+
    ```bash
    git checkout -b feature/my-new-feature
    ```
 
 2. Make your changes and commit:
+
    ```bash
    git add .
    git commit -m "feat: add new feature"
    ```
 
 3. Push to GitHub:
+
    ```bash
    git push origin feature/my-new-feature
    ```
@@ -210,6 +223,7 @@ npm run build         # Build
 ### Deploying to Staging
 
 **Automatic (on push to `develop`):**
+
 ```bash
 git checkout develop
 git merge feature/my-feature
@@ -217,6 +231,7 @@ git push origin develop
 ```
 
 **Manual deployment:**
+
 1. Go to **Actions** → **Deploy to Staging**
 2. Click **Run workflow**
 3. Enter reason (optional)
@@ -229,6 +244,7 @@ git push origin develop
 ### Deploying to Production
 
 **Option 1: Via GitHub Release (Recommended)**
+
 1. Go to **Releases** → **Create a new release**
 2. Tag version (e.g., `v1.0.0`)
 3. Title: `Release v1.0.0`
@@ -242,6 +258,7 @@ git push origin develop
    ```
 
 **Option 2: Manual Workflow**
+
 1. Go to **Actions** → **Deploy to Production**
 2. Click **Run workflow**
 3. Enter version (e.g., `v1.0.0`)
@@ -269,18 +286,21 @@ Replace `YOUR_USERNAME` with your GitHub username.
 ### Build Failures
 
 **Problem:** Type check fails
+
 ```
 Solution: Run `npm run type-check` locally and fix errors
 ```
 
 **Problem:** Linting fails
+
 ```
 Solution: Run `npm run lint:fix` to auto-fix issues
 ```
 
 **Problem:** Build fails
+
 ```
-Solution: 
+Solution:
 1. Delete node_modules and dist
 2. Run `npm install`
 3. Run `npm run build`
@@ -290,6 +310,7 @@ Solution:
 ### Dependency Issues
 
 **Problem:** `npm ci` fails
+
 ```
 Solution:
 1. Delete package-lock.json
@@ -298,6 +319,7 @@ Solution:
 ```
 
 **Problem:** Vulnerabilities found
+
 ```
 Solution:
 1. Run `npm audit`
@@ -309,8 +331,9 @@ Solution:
 ### Workflow Permission Issues
 
 **Problem:** Workflow can't create comments
+
 ```
-Solution: 
+Solution:
 1. Settings → Actions → General
 2. Workflow permissions: Read and write
 3. Re-run workflow
@@ -348,6 +371,7 @@ main (production)
 ```
 
 **Workflow:**
+
 1. Create feature branch from `develop`
 2. Develop and test locally
 3. Push and create PR to `develop`
@@ -378,11 +402,13 @@ Before approving a PR:
 GitHub Actions is free for public repositories with unlimited minutes.
 
 For private repositories:
+
 - **Free tier**: 2,000 minutes/month
 - **Average workflow**: ~3 minutes
 - **Estimated capacity**: ~650 workflows/month
 
 Current usage estimates:
+
 - 10 PRs/month × 3 workflows × 3 min = 90 minutes
 - 20 pushes/month × 2 workflows × 2 min = 80 minutes
 - 4 deployments/month × 2 min = 8 minutes
@@ -395,21 +421,25 @@ Current usage estimates:
 ### Planned Improvements
 
 - [ ] **Automated Testing**
+
   - Unit tests with Vitest
   - E2E tests with Playwright
   - Visual regression testing
 
 - [ ] **Performance Monitoring**
+
   - Bundle size tracking
   - Lighthouse CI integration
   - Performance budgets
 
 - [ ] **Advanced Security**
+
   - CodeQL analysis
   - Container scanning
   - Secret scanning
 
 - [ ] **Automated Deployment**
+
   - Token-based Devvit auth
   - Automatic rollback on errors
   - Canary deployments
@@ -449,15 +479,14 @@ gh run rerun RUN_ID
 
 ## Changelog
 
-| Date | Change | Version |
-|------|--------|---------|
-| 2025-10-30 | Initial CI/CD setup | MVP |
-| TBD | Add automated testing | v1.0 |
-| TBD | Enable automated deployment | v1.0 |
+| Date       | Change                      | Version |
+| ---------- | --------------------------- | ------- |
+| 2025-10-30 | Initial CI/CD setup         | MVP     |
+| TBD        | Add automated testing       | v1.0    |
+| TBD        | Enable automated deployment | v1.0    |
 
 ---
 
 **Maintained by**: SubVoyager Team  
 **Last Updated**: October 30, 2025  
 **Questions?** Open an issue or check workflow logs
-

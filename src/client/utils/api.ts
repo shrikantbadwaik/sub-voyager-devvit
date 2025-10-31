@@ -35,9 +35,7 @@ export async function createExpedition(
 /**
  * Unlock an expedition
  */
-export async function unlockExpedition(
-  expeditionId: string
-): Promise<UnlockExpeditionResponse> {
+export async function unlockExpedition(expeditionId: string): Promise<UnlockExpeditionResponse> {
   const response = await fetch(`/api/expeditions/${expeditionId}/unlock`, {
     method: 'POST',
   });
@@ -84,4 +82,3 @@ export async function imageToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
-

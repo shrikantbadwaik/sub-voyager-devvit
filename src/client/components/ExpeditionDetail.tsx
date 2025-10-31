@@ -102,7 +102,9 @@ export function ExpeditionDetail({
           <div className="bg-gray-50 rounded-lg p-4 mb-4">
             <h3 className="font-semibold text-gray-900 mb-2">📍 Location</h3>
             <p className="text-sm text-gray-600">{expedition.location.address}</p>
-            <p className="text-sm text-gray-600">{expedition.location.city}, {expedition.location.country}</p>
+            <p className="text-sm text-gray-600">
+              {expedition.location.city}, {expedition.location.country}
+            </p>
           </div>
 
           {/* Stats */}
@@ -133,7 +135,8 @@ export function ExpeditionDetail({
 
           {/* Author */}
           <p className="text-sm text-gray-500 mb-6">
-            Created by u/{expedition.createdBy} on {new Date(expedition.createdAt).toLocaleDateString()}
+            Created by u/{expedition.createdBy} on{' '}
+            {new Date(expedition.createdAt).toLocaleDateString()}
           </p>
 
           {/* Error */}
@@ -160,73 +163,74 @@ export function ExpeditionDetail({
                   <div>
                     <h4 className="font-semibold text-blue-900 mb-1">Expedition Unlocked</h4>
                     <p className="text-sm text-blue-700">
-                      You've committed to this adventure! Visit the location and submit proof to earn <strong>{expedition.points} points</strong>.
+                      You've committed to this adventure! Visit the location and submit proof to
+                      earn <strong>{expedition.points} points</strong>.
                     </p>
                   </div>
                 </div>
               </div>
-              
+
               {showCompleteForm ? (
-              <div className="space-y-4">
-                <h3 className="font-semibold text-gray-900">Complete Your Expedition</h3>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Photo (Optional)
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handlePhotoChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  />
-                  {completionPhoto && (
-                    <img
-                      src={completionPhoto}
-                      alt="Completion"
-                      className="mt-2 w-full h-48 object-cover rounded-md"
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-gray-900">Complete Your Expedition</h3>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Photo (Optional)
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
-                  )}
-                </div>
+                    {completionPhoto && (
+                      <img
+                        src={completionPhoto}
+                        alt="Completion"
+                        className="mt-2 w-full h-48 object-cover rounded-md"
+                      />
+                    )}
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Notes (Optional)
-                  </label>
-                  <textarea
-                    value={completionNotes}
-                    onChange={e => setCompletionNotes(e.target.value)}
-                    rows={3}
-                    placeholder="Share your experience..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Notes (Optional)
+                    </label>
+                    <textarea
+                      value={completionNotes}
+                      onChange={(e) => setCompletionNotes(e.target.value)}
+                      rows={3}
+                      placeholder="Share your experience..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
 
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => setShowCompleteForm(false)}
-                    disabled={completing}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleComplete}
-                    disabled={completing}
-                    className="flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-                  >
-                    {completing ? 'Submitting...' : 'Complete Expedition'}
-                  </button>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => setShowCompleteForm(false)}
+                      disabled={completing}
+                      className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleComplete}
+                      disabled={completing}
+                      className="flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                    >
+                      {completing ? 'Submitting...' : 'Complete Expedition'}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <button
-                onClick={() => setShowCompleteForm(true)}
-                className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
-              >
-                ✅ I Visited This Place - Submit Proof
-              </button>
-            )}
+              ) : (
+                <button
+                  onClick={() => setShowCompleteForm(true)}
+                  className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                >
+                  ✅ I Visited This Place - Submit Proof
+                </button>
+              )}
             </>
           ) : (
             <>
@@ -237,15 +241,17 @@ export function ExpeditionDetail({
                   <div>
                     <h4 className="font-semibold text-orange-900 mb-1">Ready to explore?</h4>
                     <p className="text-sm text-orange-700 mb-2">
-                      <strong>Step 1:</strong> Unlock this expedition to add it to your adventure list.
+                      <strong>Step 1:</strong> Unlock this expedition to add it to your adventure
+                      list.
                     </p>
                     <p className="text-sm text-orange-700">
-                      <strong>Step 2:</strong> Visit the location in real life, then come back to submit proof and earn <strong>{expedition.points} points</strong>!
+                      <strong>Step 2:</strong> Visit the location in real life, then come back to
+                      submit proof and earn <strong>{expedition.points} points</strong>!
                     </p>
                   </div>
                 </div>
               </div>
-              
+
               <button
                 onClick={handleUnlock}
                 disabled={unlocking}
@@ -253,7 +259,7 @@ export function ExpeditionDetail({
               >
                 {unlocking ? 'Unlocking...' : '🔓 Unlock & Add to My Adventures'}
               </button>
-              
+
               <p className="text-xs text-gray-500 text-center mt-2">
                 No points awarded yet - you'll earn points when you complete it
               </p>
@@ -264,4 +270,3 @@ export function ExpeditionDetail({
     </div>
   );
 }
-

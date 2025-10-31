@@ -22,7 +22,12 @@ const difficultyColors: Record<string, string> = {
   hard: 'bg-red-100 text-red-800',
 };
 
-export function ExpeditionCard({ expedition, onClick, isUnlocked, isCompleted }: ExpeditionCardProps) {
+export function ExpeditionCard({
+  expedition,
+  onClick,
+  isUnlocked,
+  isCompleted,
+}: ExpeditionCardProps) {
   return (
     <div
       onClick={onClick}
@@ -50,7 +55,7 @@ export function ExpeditionCard({ expedition, onClick, isUnlocked, isCompleted }:
       {/* Content */}
       <div className="p-4">
         <h3 className="text-lg font-bold text-gray-900 mb-2">{expedition.title}</h3>
-        
+
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{expedition.description}</p>
 
         {/* Location */}
@@ -60,10 +65,14 @@ export function ExpeditionCard({ expedition, onClick, isUnlocked, isCompleted }:
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-3">
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${tagColors[expedition.tag]}`}>
+          <span
+            className={`px-2 py-1 rounded-full text-xs font-medium ${tagColors[expedition.tag]}`}
+          >
             {expedition.tag.replace('-', ' ')}
           </span>
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${difficultyColors[expedition.difficulty]}`}>
+          <span
+            className={`px-2 py-1 rounded-full text-xs font-medium ${difficultyColors[expedition.difficulty]}`}
+          >
             {expedition.difficulty}
           </span>
           <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
@@ -80,4 +89,3 @@ export function ExpeditionCard({ expedition, onClick, isUnlocked, isCompleted }:
     </div>
   );
 }
-

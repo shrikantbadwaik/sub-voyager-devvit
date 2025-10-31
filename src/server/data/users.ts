@@ -7,11 +7,11 @@ import * as keys from './redis-keys';
  */
 export async function getUserProfile(username: string): Promise<UserProfile> {
   const data = await redis.get(keys.userKey(username));
-  
+
   if (data) {
     return JSON.parse(data) as UserProfile;
   }
-  
+
   // Create new user profile
   const newProfile: UserProfile = {
     username,
@@ -23,7 +23,7 @@ export async function getUserProfile(username: string): Promise<UserProfile> {
     level: 1,
     badges: [],
   };
-  
+
   await saveUserProfile(newProfile);
   return newProfile;
 }
@@ -58,7 +58,7 @@ export async function hasCompleted(username: string, expeditionId: string): Prom
 export async function unlockExpedition(username: string, expeditionId: string): Promise<void> {
   // Add to user's unlocked hash
   await redis.hSet(keys.userUnlocked(username), { [expeditionId]: new Date().toISOString() });
-  
+
   // Update user profile
   const profile = await getUserProfile(username);
   profile.expeditionsUnlocked += 1;
@@ -75,21 +75,21 @@ export async function completeExpedition(
 ): Promise<void> {
   // Add to user's completed hash
   await redis.hSet(keys.userCompleted(username), { [expeditionId]: new Date().toISOString() });
-  
+
   // Store completion details
   const completionData = JSON.stringify(completion);
   await redis.set(keys.userCompletionKey(username, expeditionId), completionData);
-  
+
   // Update user profile
   const profile = await getUserProfile(username);
   profile.expeditionsCompleted += 1;
   profile.totalPoints += completion.pointsAwarded;
-  
+
   // Calculate level (simple: 1 level per 50 points)
   profile.level = Math.floor(profile.totalPoints / 50) + 1;
-  
+
   await saveUserProfile(profile);
-  
+
   // Update leaderboards
   await updateLeaderboard(username, profile.totalPoints);
 }
@@ -103,7 +103,7 @@ export async function trackExpeditionCreation(
 ): Promise<void> {
   // Add to user's created hash
   await redis.hSet(keys.userCreated(username), { [expeditionId]: new Date().toISOString() });
-  
+
   // Update user profile
   const profile = await getUserProfile(username);
   profile.expeditionsCreated += 1;
@@ -143,7 +143,7 @@ export async function getUserCompletion(
 ): Promise<UserCompletion | null> {
   const data = await redis.get(keys.userCompletionKey(username, expeditionId));
   if (!data) return null;
-  
+
   return JSON.parse(data) as UserCompletion;
 }
 
@@ -161,11 +161,16 @@ export async function updateLeaderboard(username: string, totalPoints: number): 
 /**
  * Get global leaderboard
  */
-export async function getGlobalLeaderboard(limit: number = 100): Promise<Array<{ username: string; score: number; rank: number }>> {
-  const results = await redis.zRange(keys.leaderboardGlobal(), 0, limit - 1, { by: 'rank', reverse: true });
-  
+export async function getGlobalLeaderboard(
+  limit: number = 100
+): Promise<Array<{ username: string; score: number; rank: number }>> {
+  const results = await redis.zRange(keys.leaderboardGlobal(), 0, limit - 1, {
+    by: 'rank',
+    reverse: true,
+  });
+
   if (!results || results.length === 0) return [];
-  
+
   return results.map((item, index) => ({
     username: typeof item === 'string' ? item : item.member,
     score: typeof item === 'string' ? 0 : item.score,
@@ -184,13 +189,17 @@ export async function getUserRank(username: string): Promise<number | null> {
 /**
  * Award points to user (used for various achievements)
  */
-export async function awardPoints(username: string, points: number, reason?: string): Promise<void> {
+export async function awardPoints(
+  username: string,
+  points: number,
+  reason?: string
+): Promise<void> {
   const profile = await getUserProfile(username);
   profile.totalPoints += points;
   profile.level = Math.floor(profile.totalPoints / 50) + 1;
-  
+
   await saveUserProfile(profile);
   await updateLeaderboard(username, profile.totalPoints);
-  
+
   console.log(`Awarded ${points} points to ${username}. Reason: ${reason || 'N/A'}`);
 }

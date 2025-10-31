@@ -98,7 +98,16 @@ router.post<unknown, CreateExpeditionResponse | ErrorResponse, CreateExpeditionR
       const { title, description, coordinates, address, city, photo, tag, difficulty } = req.body;
 
       // Validate required fields
-      if (!title || !description || !coordinates || !address || !city || !photo || !tag || !difficulty) {
+      if (
+        !title ||
+        !description ||
+        !coordinates ||
+        !address ||
+        !city ||
+        !photo ||
+        !tag ||
+        !difficulty
+      ) {
         res.status(400).json({
           status: 'error',
           message: 'Missing required fields',
@@ -426,16 +435,16 @@ router.get<unknown, GetUserExpeditionsResponse | ErrorResponse>(
 
       // Fetch expeditions
       const [created, unlocked, completedExpeditions] = await Promise.all([
-        Promise.all(createdIds.map(id => expeditionsDb.getExpedition(id))),
-        Promise.all(unlockedIds.map(id => expeditionsDb.getExpedition(id))),
-        Promise.all(completedIds.map(id => expeditionsDb.getExpedition(id))),
+        Promise.all(createdIds.map((id) => expeditionsDb.getExpedition(id))),
+        Promise.all(unlockedIds.map((id) => expeditionsDb.getExpedition(id))),
+        Promise.all(completedIds.map((id) => expeditionsDb.getExpedition(id))),
       ]);
 
       // Get completion details for completed expeditions
       const completed = await Promise.all(
         completedExpeditions
           .filter((exp): exp is Expedition => exp !== null)
-          .map(async exp => {
+          .map(async (exp) => {
             const completion = await usersDb.getUserCompletion(username, exp.id);
             return {
               expedition: exp,

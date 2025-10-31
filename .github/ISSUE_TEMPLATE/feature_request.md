@@ -16,11 +16,13 @@ labels: enhancement
 ## 📊 Use Case
 
 ## 🗓️ Suggested Version
+
 - [ ] v1.0
 - [ ] v2.0
 - [ ] v3.0+
 
 ## 🏷️ Category
+
 - [ ] Gamification
 - [ ] Social
 - [ ] Map/Discovery

@@ -8,24 +8,27 @@ labels: bug
 ## 🐛 Bug Description
 
 ## 📍 Steps to Reproduce
-1. 
-2. 
-3. 
+
+1.
+2.
+3.
 
 ## 🎯 Expected Behavior
 
 ## 🔴 Actual Behavior
 
 ## 💻 Environment
-- **Version**: 
-- **Browser**: 
-- **Device**: 
-- **OS**: 
-- **Subreddit**: 
+
+- **Version**:
+- **Browser**:
+- **Device**:
+- **OS**:
+- **Subreddit**:
 
 ## 📸 Screenshots
 
 ## 🏷️ Affected Area
+
 - [ ] Frontend/UI
 - [ ] Backend/API
 - [ ] Map

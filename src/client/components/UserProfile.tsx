@@ -11,10 +11,7 @@ export function UserProfile({ profile, onClose }: UserProfileProps) {
       <div className="bg-white rounded-lg max-w-md w-full p-6">
         <div className="flex justify-between items-start mb-4">
           <h2 className="text-2xl font-bold text-gray-900">Your Profile</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-xl"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl">
             ✕
           </button>
         </div>
@@ -78,4 +75,3 @@ export function UserProfile({ profile, onClose }: UserProfileProps) {
     </div>
   );
 }
-

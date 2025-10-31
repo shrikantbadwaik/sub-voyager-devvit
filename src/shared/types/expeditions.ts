@@ -84,4 +84,3 @@ export type LeaderboardEntry = {
   rank: number;
   expeditionsCompleted: number;
 };
-

@@ -15,15 +15,15 @@ export async function generateExpeditionId(): Promise<string> {
  */
 export async function createExpedition(expedition: Expedition): Promise<void> {
   const expeditionData = JSON.stringify(expedition);
-  
+
   // Store expedition data
   await redis.set(keys.expeditionKey(expedition.id), expeditionData);
-  
+
   // Store expedition IDs in hashes (using hashes as sets)
   await redis.hSet(keys.expeditionsByStatus(expedition.status), { [expedition.id]: '1' });
   await redis.hSet(keys.expeditionsByCity(expedition.location.city), { [expedition.id]: '1' });
   await redis.hSet(keys.expeditionsByTag(expedition.tag), { [expedition.id]: '1' });
-  
+
   // Note: Geospatial indexing not available in Devvit Redis MVP
   // Will implement simple lat/lng filtering in v1.0
 }
@@ -34,7 +34,7 @@ export async function createExpedition(expedition: Expedition): Promise<void> {
 export async function getExpedition(id: string): Promise<Expedition | null> {
   const data = await redis.get(keys.expeditionKey(id));
   if (!data) return null;
-  
+
   return JSON.parse(data) as Expedition;
 }
 
@@ -56,15 +56,13 @@ export async function getExpeditionsByStatus(
 ): Promise<Expedition[]> {
   const idsHash = await redis.hGetAll(keys.expeditionsByStatus(status));
   const ids = idsHash ? Object.keys(idsHash) : [];
-  
+
   // Apply pagination
   const paginatedIds = limit ? ids.slice(offset || 0, (offset || 0) + limit) : ids;
-  
+
   // Fetch all expeditions in parallel
-  const expeditions = await Promise.all(
-    paginatedIds.map((id: string) => getExpedition(id))
-  );
-  
+  const expeditions = await Promise.all(paginatedIds.map((id: string) => getExpedition(id)));
+
   // Filter out nulls and return
   return expeditions.filter((exp): exp is Expedition => exp !== null);
 }
@@ -79,15 +77,13 @@ export async function getExpeditionsByCity(
 ): Promise<Expedition[]> {
   const idsHash = await redis.hGetAll(keys.expeditionsByCity(city));
   const ids = idsHash ? Object.keys(idsHash) : [];
-  
+
   // Apply pagination
   const paginatedIds = limit ? ids.slice(offset || 0, (offset || 0) + limit) : ids;
-  
+
   // Fetch all expeditions in parallel
-  const expeditions = await Promise.all(
-    paginatedIds.map((id: string) => getExpedition(id))
-  );
-  
+  const expeditions = await Promise.all(paginatedIds.map((id: string) => getExpedition(id)));
+
   // Filter out nulls and only return approved expeditions
   return expeditions.filter((exp): exp is Expedition => exp !== null && exp.status === 'approved');
 }
@@ -102,15 +98,13 @@ export async function getExpeditionsByTag(
 ): Promise<Expedition[]> {
   const idsHash = await redis.hGetAll(keys.expeditionsByTag(tag));
   const ids = idsHash ? Object.keys(idsHash) : [];
-  
+
   // Apply pagination
   const paginatedIds = limit ? ids.slice(offset || 0, (offset || 0) + limit) : ids;
-  
+
   // Fetch all expeditions in parallel
-  const expeditions = await Promise.all(
-    paginatedIds.map((id: string) => getExpedition(id))
-  );
-  
+  const expeditions = await Promise.all(paginatedIds.map((id: string) => getExpedition(id)));
+
   // Filter out nulls and only return approved expeditions
   return expeditions.filter((exp): exp is Expedition => exp !== null && exp.status === 'approved');
 }
@@ -118,10 +112,7 @@ export async function getExpeditionsByTag(
 /**
  * Get all approved expeditions
  */
-export async function getAllExpeditions(
-  limit?: number,
-  offset?: number
-): Promise<Expedition[]> {
+export async function getAllExpeditions(limit?: number, offset?: number): Promise<Expedition[]> {
   return getExpeditionsByStatus('approved', limit, offset);
 }
 
@@ -136,9 +127,9 @@ export async function searchExpeditions(params: {
   offset?: number;
 }): Promise<Expedition[]> {
   const { city, tag, status = 'approved', limit, offset } = params;
-  
+
   let expeditionIds: string[];
-  
+
   if (city && tag) {
     // Get intersection of city and tag
     const cityIdsHash = await redis.hGetAll(keys.expeditionsByCity(city));
@@ -156,19 +147,17 @@ export async function searchExpeditions(params: {
     const idsHash = await redis.hGetAll(keys.expeditionsByStatus(status));
     expeditionIds = idsHash ? Object.keys(idsHash) : [];
   }
-  
+
   // Apply pagination
-  const paginatedIds = limit ? expeditionIds.slice(offset || 0, (offset || 0) + limit) : expeditionIds;
-  
+  const paginatedIds = limit
+    ? expeditionIds.slice(offset || 0, (offset || 0) + limit)
+    : expeditionIds;
+
   // Fetch all expeditions in parallel
-  const expeditions = await Promise.all(
-    paginatedIds.map((id: string) => getExpedition(id))
-  );
-  
+  const expeditions = await Promise.all(paginatedIds.map((id: string) => getExpedition(id)));
+
   // Filter by status and nulls
-  return expeditions.filter(
-    (exp): exp is Expedition => exp !== null && exp.status === status
-  );
+  return expeditions.filter((exp): exp is Expedition => exp !== null && exp.status === status);
 }
 
 /**
@@ -182,21 +171,18 @@ export async function getNearbyExpeditions(
 ): Promise<Expedition[]> {
   // Get all approved expeditions
   const allExpeditions = await getAllExpeditions();
-  
+
   // Calculate distance and filter
   const nearby = allExpeditions
-    .map(exp => ({
+    .map((exp) => ({
       expedition: exp,
-      distance: calculateDistance(
-        coordinates,
-        exp.location.coordinates
-      ),
+      distance: calculateDistance(coordinates, exp.location.coordinates),
     }))
-    .filter(item => item.distance <= radiusKm)
+    .filter((item) => item.distance <= radiusKm)
     .sort((a, b) => a.distance - b.distance)
     .slice(0, limit)
-    .map(item => item.expedition);
-  
+    .map((item) => item.expedition);
+
   return nearby;
 }
 
@@ -207,14 +193,14 @@ function calculateDistance(coord1: Coordinates, coord2: Coordinates): number {
   const R = 6371; // Earth's radius in km
   const dLat = toRad(coord2.lat - coord1.lat);
   const dLng = toRad(coord2.lng - coord1.lng);
-  
+
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(toRad(coord1.lat)) *
       Math.cos(toRad(coord2.lat)) *
       Math.sin(dLng / 2) *
       Math.sin(dLng / 2);
-  
+
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
@@ -229,7 +215,7 @@ function toRad(degrees: number): number {
 export async function incrementExpeditionUnlocks(expeditionId: string): Promise<void> {
   const expedition = await getExpedition(expeditionId);
   if (!expedition) return;
-  
+
   expedition.unlockCount += 1;
   await updateExpedition(expedition);
 }
@@ -237,7 +223,7 @@ export async function incrementExpeditionUnlocks(expeditionId: string): Promise<
 export async function incrementExpeditionCompletions(expeditionId: string): Promise<void> {
   const expedition = await getExpedition(expeditionId);
   if (!expedition) return;
-  
+
   expedition.completionCount += 1;
   await updateExpedition(expedition);
 }
@@ -251,18 +237,18 @@ export async function approveExpedition(
 ): Promise<boolean> {
   const expedition = await getExpedition(expeditionId);
   if (!expedition) return false;
-  
+
   // Remove from pending
   await redis.hDel(keys.expeditionsByStatus('pending'), [expeditionId]);
-  
+
   // Add to approved
   await redis.hSet(keys.expeditionsByStatus('approved'), { [expeditionId]: '1' });
-  
+
   // Update expedition
   expedition.status = 'approved';
   expedition.approvedAt = new Date().toISOString();
   expedition.approvedBy = approvedBy;
   await updateExpedition(expedition);
-  
+
   return true;
 }

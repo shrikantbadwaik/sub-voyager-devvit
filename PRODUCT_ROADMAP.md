@@ -32,6 +32,7 @@ SubVoyager transforms Reddit communities into vibrant exploration platforms wher
 ### Unique Value Proposition
 
 While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely combines:
+
 - Real-world exploration with digital engagement
 - Map-based discovery
 - User-generated expedition content
@@ -47,6 +48,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ### Core Features
 
 #### 1. Expedition Creation
+
 - ✅ User submission form with:
   - Title, description (500 chars max)
   - Location (coordinates, address, city)
@@ -57,17 +59,20 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - ✅ Instant publication to map/list
 
 #### 2. Map View
+
 - ✅ Interactive Leaflet map with OpenStreetMap tiles
 - ✅ Expedition markers showing all approved locations
 - ✅ Click marker to view popup with basic info
 - ✅ Click popup to open full detail modal
 
 #### 3. List View
+
 - ✅ Grid layout of expedition cards (responsive: 1/2/3 columns)
 - ✅ Card displays: image, title, description (2 lines), location, tags, stats
 - ✅ Visual indicators for unlocked/completed status
 
 #### 4. Expedition Details & Actions
+
 - ✅ Full modal with expedition information
 - ✅ **Unlock Action**: Commit to exploring (adds to user's adventure list)
 - ✅ **Complete Action**: Submit proof of visit with optional photo & notes
@@ -75,6 +80,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - ✅ Visual status indicators (unlocked/completed badges)
 
 #### 5. Points & Leveling System
+
 - ✅ Points awarded on completion:
   - Easy: 10 points
   - Medium: 20 points
@@ -83,6 +89,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - ✅ Real-time profile updates
 
 #### 6. User Profile
+
 - ✅ Profile modal showing:
   - Username, current level, total points
   - Stats: created, unlocked, completed counts
@@ -90,12 +97,14 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Badges placeholder (for future)
 
 #### 7. Filtering & Search
+
 - ✅ Filter by city (Mumbai, Delhi, Jaipur, Bangalore, Pune)
 - ✅ Filter by tag (all 6 categories)
 - ✅ Combined city + tag filtering
 - ✅ Real-time results update
 
 #### 8. First-Time User Experience
+
 - ✅ Welcome modal on first visit
 - ✅ Step-by-step guide explaining unlock → visit → complete flow
 - ✅ Points system explanation
@@ -104,17 +113,20 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ### Technical Stack (MVP)
 
 **Frontend:**
+
 - React 19.1.0 with TypeScript
 - Tailwind CSS 4.1.6 for styling
 - Leaflet 1.9.4 & react-leaflet for maps
 - Vite for build tooling
 
 **Backend:**
+
 - Express 5.1.0 server (serverless)
 - Devvit Web APIs (Reddit integration)
 - Redis for data storage
 
 **Data Storage:**
+
 - Redis hashes for expeditions (indexed by status, city, tag)
 - Redis strings for user profiles
 - Redis hashes for user relationships (unlocked, completed, created)
@@ -122,16 +134,16 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 
 ### API Endpoints (MVP)
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/init` | GET | Initialize app, load user profile |
-| `/api/expeditions/create` | POST | Submit new expedition |
-| `/api/expeditions/list` | GET | Browse expeditions (with filters) |
-| `/api/expeditions/:id` | GET | Get expedition details + user status |
-| `/api/expeditions/:id/unlock` | POST | Unlock expedition |
-| `/api/expeditions/:id/complete` | POST | Complete expedition with proof |
-| `/api/user/profile` | GET | Get user profile and stats |
-| `/api/user/expeditions` | GET | Get user's created/unlocked/completed |
+| Endpoint                        | Method | Purpose                               |
+| ------------------------------- | ------ | ------------------------------------- |
+| `/api/init`                     | GET    | Initialize app, load user profile     |
+| `/api/expeditions/create`       | POST   | Submit new expedition                 |
+| `/api/expeditions/list`         | GET    | Browse expeditions (with filters)     |
+| `/api/expeditions/:id`          | GET    | Get expedition details + user status  |
+| `/api/expeditions/:id/unlock`   | POST   | Unlock expedition                     |
+| `/api/expeditions/:id/complete` | POST   | Complete expedition with proof        |
+| `/api/user/profile`             | GET    | Get user profile and stats            |
+| `/api/user/expeditions`         | GET    | Get user's created/unlocked/completed |
 
 ### Known Limitations (MVP)
 
@@ -162,6 +174,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 **Status**: 📋 Planned | **Timeline**: Weeks 5-12 (8 weeks) | **Target**: Public Beta Launch
 
 ### Goals
+
 - Production-ready app for first community (r/Mumbai or r/IndiaTravel)
 - Proper moderation and content quality
 - Better performance and user experience
@@ -170,6 +183,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ### New Features
 
 #### 1. Moderation System
+
 - **Moderation Queue**
   - All user submissions start as "pending"
   - Moderators see pending expeditions
@@ -190,6 +204,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Rate limiting (max 5 submissions per user per day)
 
 #### 2. Enhanced Media Support
+
 - **Multiple Photos per Expedition**
   - Upload up to 5 photos per expedition
   - Photo gallery/carousel in detail view
@@ -206,6 +221,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - EXIF data stripping for privacy
 
 #### 3. Reddit Integration
+
 - **Auto-Post Creation**
   - When expedition is approved, create Reddit post
   - Post template: "[New Expedition] {title} - {city}"
@@ -220,6 +236,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Opt-in/out of auto-posting per subreddit
 
 #### 4. Improved Geospatial Features
+
 - **Optimized Nearby Search**
   - Index expeditions by geohash
   - Efficient radius queries
@@ -234,6 +251,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Expand on click
 
 #### 5. Badge System
+
 - **Expedition Badges**
   - First Explorer (complete 1st expedition)
   - City Explorer (complete 5 in one city)
@@ -256,6 +274,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Badge progress tracking
 
 #### 6. Enhanced Leaderboards
+
 - **Global Leaderboard**
   - Top 100 users by points
   - Reset monthly/quarterly option
@@ -275,6 +294,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Monthly winner gets featured post
 
 #### 7. User Experience Improvements
+
 - **Search Functionality**
   - Search expeditions by name
   - Search by address/landmark
@@ -292,6 +312,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Queue completion submissions for when online
 
 #### 8. Analytics Dashboard (for Mods)
+
 - **App Statistics**
   - Total expeditions, users, completions
   - Daily/weekly/monthly active users
@@ -342,6 +363,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 **Status**: 📋 Planned | **Timeline**: Months 4-6 | **Target**: Monetization Ready & Scale
 
 ### Goals
+
 - Scale to multiple subreddits (10+ communities)
 - Activate monetization streams
 - Advanced social features
@@ -350,6 +372,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ### New Features
 
 #### 1. Seasonal Expedition Packs
+
 - **What**: Curated themed expedition collections
 - **Examples**:
   - "Monsoon Mumbai" - 10 rain-special spots
@@ -364,6 +387,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Time-limited availability
 
 #### 2. Sponsored/Featured Expeditions
+
 - **Local Business Partnerships**
   - Cafés, restaurants, tour operators pay to feature
   - "Sponsored by..." badge on expedition
@@ -380,6 +404,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Commission on coupon redemptions (10-15%)
 
 #### 3. Premium Subscription
+
 - **Premium Features** ($4.99/month or $49/year):
   - Early access to new cities/expeditions (1 week early)
   - Exclusive premium expeditions (10-20 per month)
@@ -396,6 +421,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Family leaderboard
 
 #### 4. Partner Dashboard
+
 - **Business Portal**
   - Login for partner businesses
   - Create/edit sponsored expeditions
@@ -410,6 +436,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Choose featured duration
 
 #### 5. Social Features
+
 - **Follow System**
   - Follow other explorers
   - See followers/following counts
@@ -429,6 +456,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Team leaderboard
 
 #### 6. Reviews & Ratings
+
 - **Expedition Reviews**
   - 5-star rating system
   - Written review after completion
@@ -449,6 +477,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Option to improve/update expedition
 
 #### 7. Advanced Completion Verification
+
 - **Photo Verification**
   - AI-based image similarity check (compare submission to original)
   - Geolocation EXIF data check
@@ -463,6 +492,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Manual review of flagged completions
 
 #### 8. Expedition Passport (Digital & Print)
+
 - **Digital Passport**
   - Beautiful visual summary of completed expeditions
   - Map showing all visited locations
@@ -475,6 +505,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Collector's item
 
 #### 9. Advanced Gamification
+
 - **Quests & Challenges**
   - Time-limited challenges: "Complete 5 food expeditions this week"
   - Unlock challenges: "Unlock 5 expeditions this week"
@@ -531,6 +562,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 **Status**: 🔮 Future Vision | **Timeline**: 6+ months | **Target**: Platform Maturity & Expansion
 
 ### Global Expansion
+
 - **Multi-Country Support**
   - Support for 50+ cities globally
   - Localization (multiple languages)
@@ -543,6 +575,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Airlines (travel rewards integration)
 
 ### Advanced Features
+
 - **AI-Powered Recommendations**
   - Personalized expedition suggestions based on:
     - Past completions
@@ -564,6 +597,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Booking.com partnership (hotel recommendations)
 
 ### Community Tools
+
 - **Event Organization**
   - Organize group meetups for expeditions
   - Event calendar
@@ -580,6 +614,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Trusted user program (skip moderation)
 
 ### Monetization Evolution
+
 - **Marketplace**
   - Sell expedition packs created by users
   - Revenue share (70/30 split)
@@ -598,6 +633,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ## Future Enhancements (Backlog)
 
 ### Quality of Life
+
 - Dark mode
 - Accessibility improvements (screen reader support, keyboard navigation)
 - Multiple map providers (Google Maps, Mapbox options)
@@ -605,6 +641,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - Account deletion workflow
 
 ### Engagement Features
+
 - Daily expedition recommendations
 - Monthly recap email (your achievements)
 - Year-end wrapped (Spotify-style)
@@ -612,12 +649,14 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - Weather integration (show current weather at expedition location)
 
 ### Advanced Analytics
+
 - Heatmap of popular areas
 - Time-to-complete analytics per expedition
 - Seasonal popularity trends
 - User journey analytics (discovery → unlock → complete funnel)
 
 ### Integration Ideas
+
 - Strava integration (track walks/hikes to expeditions)
 - Reddit flair based on level
 - Discord bot for expedition notifications
@@ -629,30 +668,33 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 
 ### Revenue Streams
 
-| Stream | Target | Timeline | Effort | Notes |
-|--------|--------|----------|--------|-------|
-| **Premium Subscriptions** | $2,000/month | v2.0 (Month 4) | Medium | Core monetization |
-| **Business Partnerships** | $1,500/month | v2.0 (Month 5) | High | Requires sales effort |
-| **Seasonal Packs** | $500/month | v2.0 (Month 6) | Medium | One-time purchases |
-| **Expedition Passport** | $300/month | v2.0 (Month 6) | Low | Print-on-demand |
-| **Creator Revenue Share** | $200/month | v3.0+ (Month 9+) | High | Platform fee from paid content |
-| **Merchandise** | $400/month | v3.0+ (Month 12+) | Medium | Print-on-demand |
-| **Reddit Developer Fund** | $5,000-10,000 | v2.0 (Month 6) | Low | One-time or recurring grant |
+| Stream                    | Target        | Timeline          | Effort | Notes                          |
+| ------------------------- | ------------- | ----------------- | ------ | ------------------------------ |
+| **Premium Subscriptions** | $2,000/month  | v2.0 (Month 4)    | Medium | Core monetization              |
+| **Business Partnerships** | $1,500/month  | v2.0 (Month 5)    | High   | Requires sales effort          |
+| **Seasonal Packs**        | $500/month    | v2.0 (Month 6)    | Medium | One-time purchases             |
+| **Expedition Passport**   | $300/month    | v2.0 (Month 6)    | Low    | Print-on-demand                |
+| **Creator Revenue Share** | $200/month    | v3.0+ (Month 9+)  | High   | Platform fee from paid content |
+| **Merchandise**           | $400/month    | v3.0+ (Month 12+) | Medium | Print-on-demand                |
+| **Reddit Developer Fund** | $5,000-10,000 | v2.0 (Month 6)    | Low    | One-time or recurring grant    |
 
 **Total MRR Projection (12 months)**: $5,000-7,000
 
 ### Pricing Strategy
 
 **Freemium Model:**
+
 - Free tier: Full access to core features, community expeditions
 - Premium tier: Exclusive content, enhanced features, ad-free
 
 **Premium Pricing:**
+
 - Monthly: $4.99 (target 100 subscribers = $500/month)
 - Annual: $49.99 (2 months free, target 50 subscribers = $2,500/year)
 - Family: $9.99/month (target 20 subscriptions = $200/month)
 
 **Business Partnerships:**
+
 - Featured Expedition: $100/month per location
 - Seasonal Pack Sponsorship: $500/pack
 - Custom Partnership: $1,000-5,000 (tourism boards, large businesses)
@@ -746,6 +788,7 @@ leaderboard:global                 → Sorted set (score = points)
 ## Success Metrics & KPIs
 
 ### Engagement Metrics
+
 - **Daily Active Users (DAU)**
 - **Monthly Active Users (MAU)**
 - **DAU/MAU Ratio** (stickiness)
@@ -753,6 +796,7 @@ leaderboard:global                 → Sorted set (score = points)
 - **Average session duration**
 
 ### Content Metrics
+
 - **Expeditions created per week**
 - **Expedition approval rate** (approved / submitted)
 - **Average expeditions per city**
@@ -760,12 +804,14 @@ leaderboard:global                 → Sorted set (score = points)
 - **Time to completion** (days from unlock to complete)
 
 ### Growth Metrics
+
 - **User growth rate** (week-over-week, month-over-month)
 - **Retention** (Day 1, Day 7, Day 30)
 - **Viral coefficient** (new users from shares)
 - **Subreddit growth** (installations per subreddit)
 
 ### Monetization Metrics
+
 - **Monthly Recurring Revenue (MRR)**
 - **Average Revenue Per User (ARPU)**
 - **Customer Lifetime Value (LTV)**
@@ -773,6 +819,7 @@ leaderboard:global                 → Sorted set (score = points)
 - **Churn rate** (premium cancellations)
 
 ### Quality Metrics
+
 - **Average expedition rating**
 - **Report rate** (reports per 1000 expeditions)
 - **Moderation backlog** (pending submissions)
@@ -783,16 +830,19 @@ leaderboard:global                 → Sorted set (score = points)
 ## Risk Mitigation
 
 ### Technical Risks
+
 - **Redis limits**: Monitor storage usage, implement data retention policies
 - **Performance at scale**: Load testing, caching strategies, CDN
 - **Devvit platform changes**: Stay updated with Reddit developer updates
 
 ### Product Risks
+
 - **User adoption**: Strong onboarding, clear value proposition, referral program
 - **Content quality**: Robust moderation, user reporting, quality guidelines
 - **Monetization resistance**: Generous free tier, clear premium value
 
 ### Business Risks
+
 - **Competitor apps**: Continuous innovation, community focus, unique features
 - **Reddit policy changes**: Diversify (standalone web app as backup)
 - **Seasonal fluctuations**: Year-round content, indoor expeditions, virtual options
@@ -802,6 +852,7 @@ leaderboard:global                 → Sorted set (score = points)
 ## Development Priorities
 
 ### High Priority (Must Have)
+
 1. Moderation system (v1.0)
 2. Image hosting optimization (v1.0)
 3. Reddit post integration (v1.0)
@@ -809,6 +860,7 @@ leaderboard:global                 → Sorted set (score = points)
 5. Premium tier (v2.0)
 
 ### Medium Priority (Should Have)
+
 1. Advanced search (v1.0)
 2. Reviews & ratings (v2.0)
 3. Seasonal packs (v2.0)
@@ -816,6 +868,7 @@ leaderboard:global                 → Sorted set (score = points)
 5. Mobile app (v2.0+)
 
 ### Low Priority (Nice to Have)
+
 1. AR features (v3.0+)
 2. Voice integration (v3.0+)
 3. Marketplace (v3.0+)
@@ -826,14 +879,17 @@ leaderboard:global                 → Sorted set (score = points)
 ## Team & Resources
 
 ### Current (MVP)
+
 - 1 Developer (full-stack)
 
 ### v1.0 Needs
+
 - 1 Full-stack developer
 - 1 Designer (part-time or contract)
 - 2-3 Moderators (community volunteers)
 
 ### v2.0+ Needs
+
 - 2 Developers (1 frontend, 1 backend)
 - 1 Designer (full-time)
 - 1 Business development / partnerships
@@ -847,6 +903,7 @@ leaderboard:global                 → Sorted set (score = points)
 SubVoyager has strong potential to become the go-to exploration platform on Reddit, with a clear path from MVP to monetization. The focus on real-world engagement, community-driven content, and gamification differentiates it from typical Reddit apps. With careful execution of the roadmap, SubVoyager can achieve sustainable revenue while providing genuine value to urban explorers and travel communities.
 
 **Next Immediate Steps:**
+
 1. Complete MVP testing with r/subvoyager_dev
 2. Gather user feedback and iterate
 3. Launch v1.0 with moderation and Reddit integration
@@ -858,4 +915,3 @@ SubVoyager has strong potential to become the go-to exploration platform on Redd
 **Document Version**: 1.0  
 **Last Updated**: October 30, 2025  
 **Maintained By**: SubVoyager Team
-

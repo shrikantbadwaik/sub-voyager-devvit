@@ -8,10 +8,7 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
       <div className="bg-white rounded-lg max-w-lg w-full p-6">
         <div className="flex justify-between items-start mb-4">
           <h2 className="text-2xl font-bold text-gray-900">🗺️ Welcome to SubVoyager!</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-xl"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl">
             ✕
           </button>
         </div>
@@ -21,15 +18,15 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
           <div>
             <h3 className="font-semibold text-lg text-gray-900 mb-2">Discover Hidden Gems</h3>
             <p className="text-gray-600 text-sm">
-              SubVoyager is a community-driven exploration platform. Discover secret spots, local favorites, 
-              and off-the-beaten-path locations shared by fellow explorers in your city.
+              SubVoyager is a community-driven exploration platform. Discover secret spots, local
+              favorites, and off-the-beaten-path locations shared by fellow explorers in your city.
             </p>
           </div>
 
           {/* How it Works */}
           <div>
             <h3 className="font-semibold text-lg text-gray-900 mb-3">How It Works</h3>
-            
+
             <div className="space-y-4">
               {/* Step 1 */}
               <div className="flex gap-3">
@@ -39,8 +36,8 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-1">Browse Expeditions</h4>
                   <p className="text-sm text-gray-600">
-                    Explore the map or list to find interesting places in your city. 
-                    Filter by category (food, culture, photo spots) or difficulty.
+                    Explore the map or list to find interesting places in your city. Filter by
+                    category (food, culture, photo spots) or difficulty.
                   </p>
                 </div>
               </div>
@@ -53,8 +50,8 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-1">🔓 Unlock an Expedition</h4>
                   <p className="text-sm text-gray-600">
-                    Found something interesting? Click <strong>"Unlock"</strong> to add it to your adventure list. 
-                    This is your commitment to explore it!
+                    Found something interesting? Click <strong>"Unlock"</strong> to add it to your
+                    adventure list. This is your commitment to explore it!
                   </p>
                 </div>
               </div>
@@ -67,7 +64,7 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-1">🚶 Visit in Real Life</h4>
                   <p className="text-sm text-gray-600">
-                    Use the map or address to find the location. Take photos, enjoy the experience, 
+                    Use the map or address to find the location. Take photos, enjoy the experience,
                     and immerse yourself in the hidden gem!
                   </p>
                 </div>
@@ -81,8 +78,8 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-1">✅ Complete & Earn Points</h4>
                   <p className="text-sm text-gray-600">
-                    Back in the app, click <strong>"I Visited This Place"</strong>. Upload your photo, 
-                    share your experience, and earn points based on difficulty!
+                    Back in the app, click <strong>"I Visited This Place"</strong>. Upload your
+                    photo, share your experience, and earn points based on difficulty!
                   </p>
                 </div>
               </div>
@@ -95,7 +92,7 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-1">⭐ Level Up & Share</h4>
                   <p className="text-sm text-gray-600">
-                    Earn 10-30 points per expedition. Level up every 50 points. Create your own 
+                    Earn 10-30 points per expedition. Level up every 50 points. Create your own
                     expeditions to share hidden gems with the community!
                   </p>
                 </div>
@@ -137,4 +134,3 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
     </div>
   );
 }
-

@@ -50,4 +50,3 @@ export function useExpeditions(city?: string, tag?: ExpeditionTag) {
     reload: loadExpeditions,
   };
 }
-

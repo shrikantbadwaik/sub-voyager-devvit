@@ -1,6 +1,6 @@
 /**
  * Redis Key Patterns for SubVoyager
- * 
+ *
  * This file defines all Redis key patterns used in the application.
  * Keeping them centralized prevents key conflicts and makes schema changes easier.
  */
@@ -16,7 +16,7 @@ export const expeditionKey = (id: string) => `expedition:${id}`;
 export const expeditionIdCounter = () => `expedition:id:counter`;
 
 // List of all expedition IDs by status: expeditions:{status}
-export const expeditionsByStatus = (status: 'approved' | 'pending' | 'rejected') => 
+export const expeditionsByStatus = (status: 'approved' | 'pending' | 'rejected') =>
   `expeditions:${status}`;
 
 // List of expedition IDs by city: expeditions:city:{city}
@@ -45,7 +45,7 @@ export const userCompleted = (username: string) => `user:${username}:completed`;
 export const userCreated = (username: string) => `user:${username}:created`;
 
 // User completion details: user:{username}:completion:{expeditionId}
-export const userCompletionKey = (username: string, expeditionId: string) => 
+export const userCompletionKey = (username: string, expeditionId: string) =>
   `user:${username}:completion:${expeditionId}`;
 
 // ============================================================================
@@ -64,4 +64,3 @@ export const leaderboardCity = (city: string) => `leaderboard:city:${city.toLowe
 
 // Total stats: stats:total
 export const statsTotal = () => `stats:total`;
-
