@@ -135,9 +135,11 @@ router.post<unknown, CreateExpeditionResponse | ErrorResponse, CreateExpeditionR
         },
         tag,
         difficulty,
-        status: 'pending', // All user submissions start as pending
+        status: 'approved', // MVP: Auto-approve all expeditions for testing
         createdBy: username,
         createdAt: new Date().toISOString(),
+        approvedAt: new Date().toISOString(), // Auto-approved
+        approvedBy: 'system', // Auto-approved by system
         points: difficulty === 'easy' ? 10 : difficulty === 'medium' ? 20 : 30,
         completionCount: 0,
         unlockCount: 0,
