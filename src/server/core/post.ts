@@ -13,7 +13,6 @@ export const createPost = async () => {
       backgroundUri: 'default-splash.png',
       buttonLabel: 'Start Exploring',
       description: 'Discover hidden gems and local expeditions in your city',
-      entryUri: 'index.html',
       heading: '🗺️ SubVoyager',
       appIconUri: 'default-icon.png',
     },

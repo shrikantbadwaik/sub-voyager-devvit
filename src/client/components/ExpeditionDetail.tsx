@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { Expedition } from '../../shared/types/expeditions';
 import { unlockExpedition, completeExpedition, imageToBase64 } from '../utils/api';
 
@@ -44,8 +44,8 @@ export function ExpeditionDetail({
 
     try {
       await completeExpedition(expedition.id, {
-        photo: completionPhoto || undefined,
-        notes: completionNotes || undefined,
+        ...(completionPhoto && { photo: completionPhoto }),
+        ...(completionNotes && { notes: completionNotes }),
       });
       setShowCompleteForm(false);
       onUpdate();

@@ -166,8 +166,8 @@ router.get<unknown, ListExpeditionsResponse | ErrorResponse>(
       const offset = parseInt(req.query.offset as string) || 0;
 
       const expeditions = await expeditionsDb.searchExpeditions({
-        city,
-        tag,
+        ...(city && { city }),
+        ...(tag && { tag }),
         status,
         limit: limit + 1, // Get one extra to check if there are more
         offset,
@@ -342,8 +342,8 @@ router.post<{ id: string }, CompleteExpeditionResponse | ErrorResponse, Complete
         expeditionId: id,
         username,
         completedAt: new Date().toISOString(),
-        photo: photo ? { url: photo, uploadedAt: new Date().toISOString() } : undefined,
-        notes,
+        ...(photo && { photo: { url: photo, uploadedAt: new Date().toISOString() } }),
+        ...(notes && { notes }),
         pointsAwarded: expedition.points,
       };
 

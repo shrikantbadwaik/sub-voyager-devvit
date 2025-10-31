@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { ExpeditionTag, ExpeditionDifficulty, Coordinates } from '../../shared/types/expeditions';
 import { createExpedition, imageToBase64 } from '../utils/api';
 

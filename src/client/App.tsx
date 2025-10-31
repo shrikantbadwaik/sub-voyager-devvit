@@ -42,7 +42,7 @@ export const App = () => {
   // Load expedition status when selected
   useEffect(() => {
     if (selectedExpedition) {
-      const fetchStatus = async () => {
+      void (async () => {
         try {
           const response = await fetch(`/api/expeditions/${selectedExpedition.id}`);
           const data = await response.json();
@@ -55,13 +55,13 @@ export const App = () => {
         } catch (err) {
           console.error('Failed to load expedition status:', err);
         }
-      };
-      fetchStatus();
+      })();
     }
   }, [selectedExpedition]);
 
   const handleExpeditionClick = (expedition: Expedition) => {
     setSelectedExpedition(expedition);
+    setExpeditionStatus(null);
   };
 
   const handleCloseDetail = () => {

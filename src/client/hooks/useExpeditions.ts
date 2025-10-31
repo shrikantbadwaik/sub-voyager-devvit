@@ -39,7 +39,7 @@ export function useExpeditions(city?: string, tag?: ExpeditionTag) {
   }, [city, tag]);
 
   useEffect(() => {
-    loadExpeditions();
+    void loadExpeditions();
   }, [loadExpeditions]);
 
   return {

@@ -42,16 +42,18 @@ export function useInit() {
     username,
     userProfile,
     postId,
-    refreshProfile: async () => {
-      try {
-        const response = await fetch('/api/user/profile');
-        const data = await response.json();
-        if ('profile' in data) {
-          setUserProfile(data.profile);
+    refreshProfile: () => {
+      void (async () => {
+        try {
+          const response = await fetch('/api/user/profile');
+          const data = await response.json();
+          if ('profile' in data) {
+            setUserProfile(data.profile);
+          }
+        } catch (err) {
+          console.error('Failed to refresh profile:', err);
         }
-      } catch (err) {
-        console.error('Failed to refresh profile:', err);
-      }
+      })();
     },
   };
 }
