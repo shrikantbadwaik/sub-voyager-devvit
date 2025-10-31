@@ -126,11 +126,11 @@ export const App = () => {
               </button>
               <button
                 onClick={() => setShowProfile(true)}
-                className="flex items-center gap-2 bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-colors"
+                className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg transition-colors hover:shadow-lg"
               >
                 <div className="text-right">
-                  <div className="text-sm font-semibold">{username}</div>
-                  <div className="text-xs text-orange-100">
+                  <div className="text-sm font-semibold text-gray-900">{username}</div>
+                  <div className="text-xs text-orange-600">
                     Level {userProfile?.level} • {userProfile?.totalPoints} pts
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export const App = () => {
               className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
                 view === 'map'
                   ? 'bg-white text-orange-600'
-                  : 'bg-white bg-opacity-20 hover:bg-opacity-30'
+                  : 'bg-white bg-opacity-90 hover:bg-white text-gray-900'
               }`}
             >
               🗺️ Map View
@@ -155,7 +155,7 @@ export const App = () => {
               className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
                 view === 'list'
                   ? 'bg-white text-orange-600'
-                  : 'bg-white bg-opacity-20 hover:bg-opacity-30'
+                  : 'bg-white bg-opacity-90 hover:bg-white text-gray-900'
               }`}
             >
               📋 List View
