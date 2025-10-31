@@ -1,0 +1,67 @@
+name: CI - Build and Test
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [22.x]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run type check
+        run: npm run type-check
+      
+      - name: Run linter
+        run: npm run lint
+      
+      - name: Build client
+        run: npm run build:client
+      
+      - name: Build server
+        run: npm run build:server
+      
+      - name: Check build artifacts
+        run: |
+          ls -la dist/client/
+          ls -la dist/server/
+          echo "✅ Build artifacts created successfully"
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ github.sha }}
+          path: |
+            dist/
+          retention-days: 7
+      
+      - name: Build summary
+        run: |
+          echo "## Build Summary 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Type checking passed" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Linting passed" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Client build succeeded" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Server build succeeded" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Build Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "- Client bundle: $(du -h dist/client/index.js | cut -f1)" >> $GITHUB_STEP_SUMMARY
+          echo "- Server bundle: $(du -h dist/server/index.cjs | cut -f1)" >> $GITHUB_STEP_SUMMARY

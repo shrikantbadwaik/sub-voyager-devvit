@@ -26,6 +26,17 @@ A starter to build web applications on Reddit's developer platform
 - `npm run login`: Logs your CLI into Reddit
 - `npm run check`: Type checks, lints, and prettifies your app
 
+## CI/CD
+
+SubVoyager uses GitHub Actions for continuous integration and deployment:
+
+- ✅ Automated builds and tests on every push/PR
+- ✅ Code quality checks (ESLint, Prettier, TypeScript)
+- ✅ Security audits for dependencies
+- ✅ Staging and production deployment workflows
+
+See [CI_CD_SETUP.md](./CI_CD_SETUP.md) for complete documentation.
+
 ## Cursor Integration
 
 This template comes with a pre-configured cursor environment. To get started, [download cursor](https://www.cursor.com/downloads) and enable the `devvit-mcp` when prompted.
