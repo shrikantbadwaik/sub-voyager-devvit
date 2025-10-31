@@ -33,7 +33,7 @@ export function useInit() {
       }
     };
 
-    init();
+    void init();
   }, []);
 
   return {

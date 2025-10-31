@@ -70,14 +70,14 @@ export const App = () => {
   };
 
   const handleExpeditionUpdate = () => {
-    reload();
+    void reload();
     setSelectedExpedition(null);
     setExpeditionStatus(null);
   };
 
   const handleFormSuccess = () => {
     setShowForm(false);
-    reload();
+    void reload();
   };
 
   // Show loading state
