@@ -182,26 +182,99 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 
 ### New Features
 
-#### 1. Moderation System
+#### 1. Hybrid Moderation System (Three-Tier Approval)
 
-- **Moderation Queue**
-  - All user submissions start as "pending"
-  - Moderators see pending expeditions
-  - Approve/reject with reason
-  - Email/notification to submitter on decision
-- **Moderator Dashboard**
-  - View all pending submissions
-  - Filter by city, tag, date
-  - Bulk actions (approve multiple)
-  - Report management
-- **User Reporting**
-  - Report button on expeditions (inappropriate, incorrect location, spam)
-  - Auto-flag expeditions with 3+ reports
-  - Moderator review of flagged content
-- **Auto-Moderation**
-  - Word filter for titles/descriptions
-  - Duplicate detection (similar titles + close coordinates)
+> **MVP Note:** Currently auto-approving all expeditions for testing. Full system in v1.0.
+
+##### **Tier 1: Trusted User Auto-Approval** 🌟
+
+**Eligibility Criteria:**
+- Level 7+ (350+ points)
+- Completion rate > 70%
+- No rejected expeditions in last 30 days
+- Account age > 30 days
+
+**How It Works:**
+- Submissions from trusted users → Immediately `status: 'approved'`
+- Auto-approval privilege can be revoked if quality drops
+- Rewards active, quality contributors
+- Reduces moderation workload
+
+##### **Tier 2: Community Voting** 👥
+
+**For Level 1-6 Users:**
+- Submissions → `status: 'pending_community_review'`
+- Visible to Level 3+ users for voting
+- Voting Period: 48 hours
+
+**Voting Mechanism:**
+- ✅ Upvote: "This looks good" (approve recommendation)
+- ⚠️ Downvote: "Needs review" (with reason: spam/wrong location/inappropriate)
+- Voters earn +1 point per vote
+- Bonus +5 points if vote aligns with final decision
+
+**Auto-Approval Thresholds:**
+- **10+ upvotes** and **< 3 downvotes** → Auto-approve
+- **5+ downvotes** → Escalate to moderator
+- **48 hours** with no decision → Escalate to moderator
+- **Mixed signals** (5-9 upvotes, 3-4 downvotes) → Escalate to moderator
+
+##### **Tier 3: Moderator Final Authority** 👮
+
+**Moderator Dashboard:**
+- View all pending expeditions (community-voted & escalated)
+- Filter by status, city, tag, date, vote count
+- Bulk approve/reject functionality
+- User management (ban/shadowban)
+- **Override any community decision** (final say)
+
+**Moderator Actions:**
+- ✅ **Approve** → `status: 'approved'`
+- ❌ **Reject** → `status: 'rejected'` + mandatory reason
+- 🔄 **Override Community Vote** → Approve/reject despite votes
+- 🚫 **Ban User** → Block future submissions
+- 📝 **Edit Submission** → Fix typos, update details before approval
+
+**Notification System:**
+- User notified of approval/rejection via Reddit message
+- Rejection includes reason and improvement suggestions
+- Appeal button for rejected submissions (30-day window)
+
+**Additional Moderation Tools:**
+
+- **Auto-Moderation Rules**
+  - Profanity filter for titles/descriptions
+  - Duplicate detection (similar titles + coordinates within 100m)
   - Rate limiting (max 5 submissions per user per day)
+  - Image validation (min 800x600px, max 10MB, JPG/PNG/WebP)
+  - Spam pattern detection (repeated URLs, promotional text)
+
+- **Community Reporting**
+  - Report button on any expedition
+  - Categories: Spam, Wrong Location, Inappropriate, Duplicate, Other
+  - Auto-flag at 3+ reports → Priority moderator queue
+  - Reporter anonymity maintained
+  - False reporting penalties after review
+
+- **Trust Score System**
+  - Algorithm calculates user submission quality
+  - Factors:
+    - Approval rate (approved / total submissions)
+    - Community vote ratios
+    - Report frequency (how often they're reported)
+    - Edit history (frequent edits = lower trust)
+  - Trust score affects:
+    - Eligibility for auto-approval (Tier 1)
+    - Visibility in community voting
+    - Rate limiting thresholds
+
+- **Moderation Analytics Dashboard**
+  - Approval rates by user, city, tag
+  - Common rejection reasons (chart)
+  - Average time to approval
+  - Community voting participation metrics
+  - Top contributors (by approvals)
+  - Moderation queue health (pending count, wait times)
 
 #### 2. Enhanced Media Support
 
