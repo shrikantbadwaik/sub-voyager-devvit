@@ -3,6 +3,22 @@ import type { UserProfile, UserCompletion } from '../../shared/types/expeditions
 import * as keys from './redis-keys';
 
 /**
+ * Calculate user level based on total points
+ * Level 1 (Newbie): 0-99 points
+ * Level 2 (Explorer): 100-249 points
+ * Level 3 (Adventurer): 250-499 points
+ * Level 4 (Pro Explorer): 500-999 points
+ * Level 5 (Legend): 1000+ points
+ */
+function calculateLevel(points: number): number {
+  if (points >= 1000) return 5;
+  if (points >= 500) return 4;
+  if (points >= 250) return 3;
+  if (points >= 100) return 2;
+  return 1;
+}
+
+/**
  * Get or create a user profile
  */
 export async function getUserProfile(username: string): Promise<UserProfile> {
@@ -85,8 +101,8 @@ export async function completeExpedition(
   profile.expeditionsCompleted += 1;
   profile.totalPoints += completion.pointsAwarded;
 
-  // Calculate level (simple: 1 level per 50 points)
-  profile.level = Math.floor(profile.totalPoints / 50) + 1;
+  // Calculate level based on defined thresholds
+  profile.level = calculateLevel(profile.totalPoints);
 
   await saveUserProfile(profile);
 
@@ -196,7 +212,7 @@ export async function awardPoints(
 ): Promise<void> {
   const profile = await getUserProfile(username);
   profile.totalPoints += points;
-  profile.level = Math.floor(profile.totalPoints / 50) + 1;
+  profile.level = calculateLevel(profile.totalPoints);
 
   await saveUserProfile(profile);
   await updateLeaderboard(username, profile.totalPoints);
