@@ -6,6 +6,23 @@ import type {
 } from '../../shared/types/expeditions';
 import { createExpedition, imageToBase64 } from '../utils/api';
 
+// City center coordinates (used as defaults)
+const CITY_COORDINATES: Record<string, Coordinates> = {
+  Mumbai: { lat: 19.076, lng: 72.8777 },
+  Delhi: { lat: 28.6139, lng: 77.209 },
+  Bangalore: { lat: 12.9716, lng: 77.5946 },
+  Hyderabad: { lat: 17.385, lng: 78.4867 },
+  Chennai: { lat: 13.0827, lng: 80.2707 },
+  Kolkata: { lat: 22.5726, lng: 88.3639 },
+  Pune: { lat: 18.5204, lng: 73.8567 },
+  Jaipur: { lat: 26.9124, lng: 75.7873 },
+};
+
+// Helper function to get city coordinates with guaranteed return
+function getCityCoordinates(city: string): Coordinates {
+  return CITY_COORDINATES[city] ?? { lat: 19.076, lng: 72.8777 }; // Default to Mumbai
+}
+
 type ExpeditionFormProps = {
   onSuccess: () => void;
   onCancel: () => void;
@@ -16,8 +33,6 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
   const [description, setDescription] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('Mumbai');
-  const [lat, setLat] = useState('19.0760');
-  const [lng, setLng] = useState('72.8777');
   const [tag, setTag] = useState<ExpeditionTag>('hidden-gem');
   const [difficulty, setDifficulty] = useState<ExpeditionDifficulty>('easy');
   const [photo, setPhoto] = useState<string>('');
@@ -49,10 +64,8 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
     setError(null);
 
     try {
-      const coordinates: Coordinates = {
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
-      };
+      // Use city center coordinates as default
+      const coordinates = getCityCoordinates(city);
 
       await createExpedition({
         title,
@@ -154,44 +167,20 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
 
           {/* Address */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Address *</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Location Address *
+            </label>
             <input
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required
-              placeholder="e.g., Linking Road, Bandra West"
+              placeholder="e.g., Marine Drive, Bandra West, Near Cafe Madras"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
-          </div>
-
-          {/* Coordinates */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Latitude *</label>
-              <input
-                type="number"
-                step="any"
-                value={lat}
-                onChange={(e) => setLat(e.target.value)}
-                required
-                placeholder="19.0760"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Longitude *</label>
-              <input
-                type="number"
-                step="any"
-                value={lng}
-                onChange={(e) => setLng(e.target.value)}
-                required
-                placeholder="72.8777"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Provide a descriptive address to help others find this expedition
+            </p>
           </div>
 
           {/* Difficulty */}

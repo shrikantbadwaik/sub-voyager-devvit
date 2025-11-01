@@ -507,6 +507,53 @@ router.post('/internal/menu/post-create', async (_req, res): Promise<void> => {
   }
 });
 
+// ============================================================================
+// GEOCODING PROXY (to bypass CSP restrictions)
+// ============================================================================
+
+router.get('/api/geocode/search', async (req, res): Promise<void> => {
+  try {
+    const query = req.query.q as string;
+
+    if (!query || query.length < 3) {
+      res.json([]);
+      return;
+    }
+
+    console.log(`[GEOCODE] Searching for: ${query}`);
+
+    const nominatimUrl =
+      `https://nominatim.openstreetmap.org/search?` +
+      `format=json&q=${encodeURIComponent(query)}&` +
+      `limit=5&addressdetails=1`;
+
+    const response = await fetch(nominatimUrl, {
+      headers: {
+        'User-Agent': 'SubVoyager/1.0 (Reddit Devvit App)',
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`[GEOCODE] Nominatim error: ${response.status}`);
+      res.status(response.status).json([]);
+      return;
+    }
+
+    const data = (await response.json()) as Array<{
+      display_name: string;
+      lat: string;
+      lon: string;
+      type?: string;
+    }>;
+    console.log(`[GEOCODE] Found ${data.length} results`);
+
+    res.json(data);
+  } catch (error) {
+    console.error('[GEOCODE] Error:', error);
+    res.status(500).json([]);
+  }
+});
+
 // Use router middleware
 app.use(router);
 
