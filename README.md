@@ -39,7 +39,6 @@ See [PRODUCT_ROADMAP.md](./PRODUCT_ROADMAP.md) for the complete feature roadmap.
 - **[Express](https://expressjs.com/)**: Backend API server
 - **[Redis](https://redis.io/)**: In-memory data store via Devvit's Redis client
 - **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first styling
-- **[Leaflet](https://leafletjs.com/)** & **[React-Leaflet](https://react-leaflet.js.org/)**: Interactive maps
 
 ## 🚀 Getting Started
 

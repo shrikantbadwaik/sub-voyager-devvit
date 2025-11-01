@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [MVP Simplified] - 2025-11-01
+
+### 🧹 Code Cleanup & Simplification
+
+#### Removed Unused Features
+- **Deleted ExpeditionMap component** - Leftover from map view removal
+- **Removed Leaflet dependencies** - leaflet, react-leaflet, @types/leaflet
+- **Cleaned up App.tsx** - Removed map view state and rendering logic
+- **Bundle size reduced** - Back to 217KB (from 381KB with unused Leaflet)
+
+#### Why This Cleanup?
+- Map view was removed in earlier version due to Devvit CSP restrictions
+- Code and dependencies were left behind, causing confusion
+- Simpler codebase = easier maintenance
+
+---
+
 ## [MVP Enhanced v2] - 2025-10-30
 
 ### 🔄 Added - CI/CD Pipeline

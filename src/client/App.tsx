@@ -3,17 +3,13 @@ import { useInit } from './hooks/useInit';
 import { useExpeditions } from './hooks/useExpeditions';
 import { ExpeditionForm } from './components/ExpeditionForm';
 import { ExpeditionCard } from './components/ExpeditionCard';
-import { ExpeditionMap } from './components/ExpeditionMap';
 import { ExpeditionDetail } from './components/ExpeditionDetail';
 import { UserProfile } from './components/UserProfile';
 import { FirstTimeHelp } from './components/FirstTimeHelp';
 import type { Expedition, ExpeditionTag } from '../shared/types/expeditions';
 
-type View = 'map' | 'list';
-
 export const App = () => {
   const { loading: initLoading, error: initError, username, userProfile } = useInit();
-  const [view, setView] = useState<View>('map');
   const [selectedCity, setSelectedCity] = useState<string>('');
   const [selectedTag, setSelectedTag] = useState<ExpeditionTag | ''>('');
   const {
@@ -138,28 +134,11 @@ export const App = () => {
             </div>
           </div>
 
-          {/* View Toggle */}
+          {/* View Label */}
           <div className="flex gap-2">
-            <button
-              onClick={() => setView('map')}
-              className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
-                view === 'map'
-                  ? 'bg-white text-orange-600'
-                  : 'bg-white bg-opacity-90 hover:bg-white text-gray-900'
-              }`}
-            >
-              🗺️ Map View
-            </button>
-            <button
-              onClick={() => setView('list')}
-              className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
-                view === 'list'
-                  ? 'bg-white text-orange-600'
-                  : 'bg-white bg-opacity-90 hover:bg-white text-gray-900'
-              }`}
-            >
-              📋 List View
-            </button>
+            <div className="flex-1 py-2 px-4 rounded-lg font-medium bg-white text-orange-600 text-center">
+              📋 Expeditions
+            </div>
           </div>
         </div>
       </header>
@@ -228,19 +207,6 @@ export const App = () => {
               </button>
             </div>
           </div>
-        ) : view === 'map' ? (
-          <ExpeditionMap
-            expeditions={expeditions}
-            onMarkerClick={handleExpeditionClick}
-            center={
-              expeditions.length > 0
-                ? [
-                    expeditions[0]!.location.coordinates.lat,
-                    expeditions[0]!.location.coordinates.lng,
-                  ]
-                : [19.076, 72.8777]
-            }
-          />
         ) : (
           <div className="h-full overflow-y-auto p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
