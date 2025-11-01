@@ -1,6 +1,6 @@
 # 🗺️ SubVoyager Product Roadmap
 
-**An interactive, community-driven map experience for discovering hidden gems and local expeditions**
+**An interactive, community-driven expedition discovery platform for uncovering hidden gems and local adventures**
 
 ---
 
@@ -34,7 +34,7 @@ SubVoyager transforms Reddit communities into vibrant exploration platforms wher
 While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely combines:
 
 - Real-world exploration with digital engagement
-- Map-based discovery
+- Curated expedition discovery
 - User-generated expedition content
 - Gamification with meaningful rewards
 - Community building through shared experiences
@@ -56,22 +56,15 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Tag selection (food, photo-spot, culture, walk, nature, hidden-gem)
   - Difficulty level (easy/medium/hard)
 - ✅ Auto-approval system (no moderation queue for MVP)
-- ✅ Instant publication to map/list
+- ✅ Instant publication to list view
 
-#### 2. Map View
-
-- ✅ Interactive Leaflet map with OpenStreetMap tiles
-- ✅ Expedition markers showing all approved locations
-- ✅ Click marker to view popup with basic info
-- ✅ Click popup to open full detail modal
-
-#### 3. List View
+#### 2. List View
 
 - ✅ Grid layout of expedition cards (responsive: 1/2/3 columns)
 - ✅ Card displays: image, title, description (2 lines), location, tags, stats
 - ✅ Visual indicators for unlocked/completed status
 
-#### 4. Expedition Details & Actions
+#### 3. Expedition Details & Actions
 
 - ✅ Full modal with expedition information
 - ✅ **Unlock Action**: Commit to exploring (adds to user's adventure list)
@@ -79,7 +72,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - ✅ Clear step-by-step instructions for users
 - ✅ Visual status indicators (unlocked/completed badges)
 
-#### 5. Points & Leveling System
+#### 4. Points & Leveling System
 
 - ✅ Points awarded on completion:
   - Easy: 10 points
@@ -88,7 +81,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - ✅ Auto-leveling: 1 level per 50 points
 - ✅ Real-time profile updates
 
-#### 6. User Profile
+#### 5. User Profile
 
 - ✅ Profile modal showing:
   - Username, current level, total points
@@ -96,14 +89,14 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Member since date
   - Badges placeholder (for future)
 
-#### 7. Filtering & Search
+#### 6. Filtering & Search
 
 - ✅ Filter by city (Mumbai, Delhi, Jaipur, Bangalore, Pune)
 - ✅ Filter by tag (all 6 categories)
 - ✅ Combined city + tag filtering
 - ✅ Real-time results update
 
-#### 8. First-Time User Experience
+#### 7. First-Time User Experience
 
 - ✅ Welcome modal on first visit
 - ✅ Step-by-step guide explaining unlock → visit → complete flow
@@ -116,7 +109,6 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 
 - React 19.1.0 with TypeScript
 - Tailwind CSS 4.1.6 for styling
-- Leaflet 1.9.4 & react-leaflet for maps
 - Vite for build tooling
 
 **Backend:**
@@ -794,7 +786,6 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 │              Frontend (React)               │
 │  - Vite build                               │
 │  - Tailwind CSS                             │
-│  - React Leaflet (maps)                     │
 │  - TypeScript                               │
 └──────────────────┬──────────────────────────┘
                    │ fetch('/api/...')

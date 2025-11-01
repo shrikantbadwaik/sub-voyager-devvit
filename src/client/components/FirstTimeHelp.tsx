@@ -43,8 +43,8 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-1">Browse Expeditions</h4>
                   <p className="text-sm text-gray-600">
-                    Explore the map or list to find interesting places in your city. Filter by
-                    category (food, culture, photo spots) or difficulty.
+                    Explore the list to find interesting places in your city. Filter by category
+                    (food, culture, photo spots, nature, walks) or city.
                   </p>
                 </div>
               </div>
@@ -71,8 +71,8 @@ export function FirstTimeHelp({ onClose }: FirstTimeHelpProps) {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-1">🚶 Visit in Real Life</h4>
                   <p className="text-sm text-gray-600">
-                    Use the map or address to find the location. Take photos, enjoy the experience,
-                    and immerse yourself in the hidden gem!
+                    Use the address and coordinates to find the location. Take photos, enjoy the
+                    experience, and immerse yourself in the hidden gem!
                   </p>
                 </div>
               </div>

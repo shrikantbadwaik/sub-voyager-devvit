@@ -2,14 +2,13 @@
 
 > Discover hidden gems, unlock micro-expeditions, and explore your city like never before.
 
-**SubVoyager** is an interactive, community-driven map experience built on Reddit's developer platform. Users discover and share "micro-expeditions" — hidden gems, photo spots, local food hunts, cultural rituals, and off-beat walking routes in their city or region.
+**SubVoyager** is an interactive, community-driven expedition discovery platform built on Reddit's developer platform. Users discover and share "micro-expeditions" — hidden gems, photo spots, local food hunts, cultural rituals, and off-beat walking routes in their city or region.
 
 ## ✨ Features
 
 ### MVP (Current)
 
-- 🗺️ **Interactive Map View** - Explore expeditions on an interactive Leaflet map
-- 📋 **List View** - Browse expeditions in a card-based grid layout
+- 📋 **Expedition List View** - Browse expeditions in a beautiful card-based grid layout
 - ➕ **Create Expeditions** - Share your discoveries with photos, locations, and descriptions
 - 🔓 **Unlock System** - Add expeditions to your personal adventure list
 - ✅ **Complete Expeditions** - Mark expeditions as completed with proof photos and notes
@@ -103,7 +102,6 @@ sub-voyager/
 ├── src/
 │   ├── client/              # React frontend (webview)
 │   │   ├── components/      # UI components
-│   │   │   ├── ExpeditionMap.tsx       # Interactive Leaflet map
 │   │   │   ├── ExpeditionCard.tsx      # Expedition summary cards
 │   │   │   ├── ExpeditionDetail.tsx    # Full expedition view
 │   │   │   ├── ExpeditionForm.tsx      # Create expedition form
@@ -159,7 +157,7 @@ See [src/server/index.ts](./src/server/index.ts) for full API documentation.
 
 ### For Explorers (Users)
 
-1. **Browse** expeditions on the map or in list view
+1. **Browse** expeditions in the list view
 2. **Unlock** an expedition to add it to your adventure list
 3. **Visit** the location and experience it in real life
 4. **Complete** the expedition by uploading a photo and notes
@@ -226,7 +224,6 @@ This project is licensed under the BSD-3-Clause License - see the [LICENSE](./LI
 ## 🙏 Acknowledgments
 
 - Built with [Devvit](https://developers.reddit.com/) by Reddit
-- Maps powered by [Leaflet](https://leafletjs.com/) and [OpenStreetMap](https://www.openstreetmap.org/)
 - Icons and UI inspired by modern design principles
 
 ## 📧 Contact
