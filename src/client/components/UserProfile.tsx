@@ -7,7 +7,10 @@ type UserProfileProps = {
 
 export function UserProfile({ profile, onClose }: UserProfileProps) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4" style={{ zIndex: 9999 }}>
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+      style={{ zIndex: 9999 }}
+    >
       <div className="bg-white rounded-lg max-w-md w-full p-6">
         <div className="flex justify-between items-start mb-4">
           <h2 className="text-2xl font-bold text-gray-900">Your Profile</h2>

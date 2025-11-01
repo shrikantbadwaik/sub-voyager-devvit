@@ -189,12 +189,14 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ##### **Tier 1: Trusted User Auto-Approval** 🌟
 
 **Eligibility Criteria:**
+
 - Level 7+ (350+ points)
 - Completion rate > 70%
 - No rejected expeditions in last 30 days
 - Account age > 30 days
 
 **How It Works:**
+
 - Submissions from trusted users → Immediately `status: 'approved'`
 - Auto-approval privilege can be revoked if quality drops
 - Rewards active, quality contributors
@@ -203,17 +205,20 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ##### **Tier 2: Community Voting** 👥
 
 **For Level 1-6 Users:**
+
 - Submissions → `status: 'pending_community_review'`
 - Visible to Level 3+ users for voting
 - Voting Period: 48 hours
 
 **Voting Mechanism:**
+
 - ✅ Upvote: "This looks good" (approve recommendation)
 - ⚠️ Downvote: "Needs review" (with reason: spam/wrong location/inappropriate)
 - Voters earn +1 point per vote
 - Bonus +5 points if vote aligns with final decision
 
 **Auto-Approval Thresholds:**
+
 - **10+ upvotes** and **< 3 downvotes** → Auto-approve
 - **5+ downvotes** → Escalate to moderator
 - **48 hours** with no decision → Escalate to moderator
@@ -222,6 +227,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 ##### **Tier 3: Moderator Final Authority** 👮
 
 **Moderator Dashboard:**
+
 - View all pending expeditions (community-voted & escalated)
 - Filter by status, city, tag, date, vote count
 - Bulk approve/reject functionality
@@ -229,6 +235,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - **Override any community decision** (final say)
 
 **Moderator Actions:**
+
 - ✅ **Approve** → `status: 'approved'`
 - ❌ **Reject** → `status: 'rejected'` + mandatory reason
 - 🔄 **Override Community Vote** → Approve/reject despite votes
@@ -236,6 +243,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 - 📝 **Edit Submission** → Fix typos, update details before approval
 
 **Notification System:**
+
 - User notified of approval/rejection via Reddit message
 - Rejection includes reason and improvement suggestions
 - Appeal button for rejected submissions (30-day window)
@@ -243,6 +251,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
 **Additional Moderation Tools:**
 
 - **Auto-Moderation Rules**
+
   - Profanity filter for titles/descriptions
   - Duplicate detection (similar titles + coordinates within 100m)
   - Rate limiting (max 5 submissions per user per day)
@@ -250,6 +259,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - Spam pattern detection (repeated URLs, promotional text)
 
 - **Community Reporting**
+
   - Report button on any expedition
   - Categories: Spam, Wrong Location, Inappropriate, Duplicate, Other
   - Auto-flag at 3+ reports → Priority moderator queue
@@ -257,6 +267,7 @@ While many Reddit apps focus on quizzes and challenges, SubVoyager uniquely comb
   - False reporting penalties after review
 
 - **Trust Score System**
+
   - Algorithm calculates user submission quality
   - Factors:
     - Approval rate (approved / total submissions)

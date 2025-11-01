@@ -125,7 +125,7 @@ export async function trackExpeditionCreation(
   profile.expeditionsCreated += 1;
   profile.totalPoints += 10; // Award 10 points for creating an expedition
   profile.level = calculateLevel(profile.totalPoints); // Recalculate level
-  
+
   await saveUserProfile(profile);
   await updateLeaderboard(username, profile.totalPoints);
 }
