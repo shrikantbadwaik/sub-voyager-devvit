@@ -108,7 +108,7 @@ router.post<unknown, CreateExpeditionResponse | ErrorResponse, CreateExpeditionR
         !tag ||
         !difficulty
       ) {
-        res.status(400).json({
+      res.status(400).json({
           status: 'error',
           message: 'Missing required fields',
         });
@@ -216,9 +216,9 @@ router.get<{ id: string }, GetExpeditionResponse | ErrorResponse>(
         res.status(404).json({
           status: 'error',
           message: 'Expedition not found',
-        });
-        return;
-      }
+      });
+      return;
+    }
 
       // Check if user has unlocked/completed
       const isUnlocked = username ? await usersDb.hasUnlocked(username, id) : false;
@@ -364,13 +364,13 @@ router.post<{ id: string }, CompleteExpeditionResponse | ErrorResponse, Complete
 
       const userProfile = await usersDb.getUserProfile(username);
 
-      res.json({
+    res.json({
         success: true,
         message: `Expedition completed! You earned ${expedition.points} points!`,
         completion,
         userProfile,
         pointsAwarded: expedition.points,
-      });
+    });
     } catch (error) {
       console.error('Error completing expedition:', error);
       res.status(500).json({
@@ -426,9 +426,9 @@ router.get<unknown, GetUserExpeditionsResponse | ErrorResponse>(
         res.status(401).json({
           status: 'error',
           message: 'User not authenticated',
-        });
-        return;
-      }
+      });
+      return;
+    }
 
       // Get expedition IDs
       const createdIds = await usersDb.getUserCreatedIds(username);
@@ -455,7 +455,7 @@ router.get<unknown, GetUserExpeditionsResponse | ErrorResponse>(
           })
       );
 
-      res.json({
+    res.json({
         created: created.filter((exp): exp is Expedition => exp !== null),
         unlocked: unlocked.filter((exp): exp is Expedition => exp !== null),
         completed,
@@ -465,7 +465,7 @@ router.get<unknown, GetUserExpeditionsResponse | ErrorResponse>(
       res.status(500).json({
         status: 'error',
         message: error instanceof Error ? error.message : 'Failed to get user expeditions',
-      });
+    });
     }
   }
 );
@@ -504,53 +504,6 @@ router.post('/internal/menu/post-create', async (_req, res): Promise<void> => {
       status: 'error',
       message: 'Failed to create post',
     });
-  }
-});
-
-// ============================================================================
-// GEOCODING PROXY (to bypass CSP restrictions)
-// ============================================================================
-
-router.get('/api/geocode/search', async (req, res): Promise<void> => {
-  try {
-    const query = req.query.q as string;
-
-    if (!query || query.length < 3) {
-      res.json([]);
-      return;
-    }
-
-    console.log(`[GEOCODE] Searching for: ${query}`);
-
-    const nominatimUrl =
-      `https://nominatim.openstreetmap.org/search?` +
-      `format=json&q=${encodeURIComponent(query)}&` +
-      `limit=5&addressdetails=1`;
-
-    const response = await fetch(nominatimUrl, {
-      headers: {
-        'User-Agent': 'SubVoyager/1.0 (Reddit Devvit App)',
-      },
-    });
-
-    if (!response.ok) {
-      console.error(`[GEOCODE] Nominatim error: ${response.status}`);
-      res.status(response.status).json([]);
-      return;
-    }
-
-    const data = (await response.json()) as Array<{
-      display_name: string;
-      lat: string;
-      lon: string;
-      type?: string;
-    }>;
-    console.log(`[GEOCODE] Found ${data.length} results`);
-
-    res.json(data);
-  } catch (error) {
-    console.error('[GEOCODE] Error:', error);
-    res.status(500).json([]);
   }
 });
 
