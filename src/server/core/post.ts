@@ -10,11 +10,11 @@ export const createPost = async () => {
     splash: {
       // Splash Screen Configuration
       appDisplayName: 'SubVoyager',
-      backgroundUri: 'default-splash.png',
+      backgroundUri: 'splash-bg.png',
       buttonLabel: 'Start Exploring',
       description: 'Discover hidden gems and local expeditions in your city',
       heading: '🗺️ SubVoyager',
-      appIconUri: 'default-icon.png',
+      appIconUri: 'app-icon.png',
     },
     postData: {
       appVersion: '1.0.0-mvp',
