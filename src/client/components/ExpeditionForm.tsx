@@ -16,6 +16,13 @@ const CITY_COORDINATES: Record<string, Coordinates> = {
   Kolkata: { lat: 22.5726, lng: 88.3639 },
   Pune: { lat: 18.5204, lng: 73.8567 },
   Jaipur: { lat: 26.9124, lng: 75.7873 },
+  Ahmedabad: { lat: 23.0225, lng: 72.5714 },
+  Surat: { lat: 21.1702, lng: 72.8311 },
+  Lucknow: { lat: 26.8467, lng: 80.9462 },
+  Chandigarh: { lat: 30.7333, lng: 76.7794 },
+  Indore: { lat: 22.7196, lng: 75.8577 },
+  Kochi: { lat: 9.9312, lng: 76.2673 },
+  Goa: { lat: 15.2993, lng: 74.124 },
 };
 
 // Helper function to get city coordinates with guaranteed return
@@ -141,9 +148,19 @@ export function ExpeditionForm({ onSuccess, onCancel }: ExpeditionFormProps) {
               >
                 <option value="Mumbai">Mumbai</option>
                 <option value="Delhi">Delhi</option>
-                <option value="Jaipur">Jaipur</option>
                 <option value="Bangalore">Bangalore</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
                 <option value="Pune">Pune</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Surat">Surat</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Indore">Indore</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Goa">Goa</option>
               </select>
             </div>
 

@@ -154,9 +154,19 @@ export const App = () => {
             <option value="">All Cities</option>
             <option value="Mumbai">Mumbai</option>
             <option value="Delhi">Delhi</option>
-            <option value="Jaipur">Jaipur</option>
             <option value="Bangalore">Bangalore</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
             <option value="Pune">Pune</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Surat">Surat</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Indore">Indore</option>
+            <option value="Kochi">Kochi</option>
+            <option value="Goa">Goa</option>
           </select>
 
           <select
