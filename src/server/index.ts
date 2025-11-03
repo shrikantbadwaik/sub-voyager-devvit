@@ -12,7 +12,7 @@ import type {
   GetUserExpeditionsResponse,
   ErrorResponse,
 } from '../shared/types/api';
-import type { Expedition, UserCompletion } from '../shared/types/expeditions';
+import type { Expedition, UserCompletion, ExpeditionTag, ExpeditionDifficulty } from '../shared/types/expeditions';
 import { reddit, createServer, context, getServerPort } from '@devvit/web/server';
 import { createPost } from './core/post';
 import * as expeditionsDb from './data/expeditions';
@@ -503,6 +503,215 @@ router.post('/internal/menu/post-create', async (_req, res): Promise<void> => {
     res.status(400).json({
       status: 'error',
       message: 'Failed to create post',
+    });
+  }
+});
+
+// ============================================================================
+// NATIVE FORM for EXPEDITION CREATION (Works in Reddit App!)
+// ============================================================================
+
+// Menu action to show the native form
+router.post('/internal/menu/create-expedition', async (_req, res): Promise<void> => {
+  res.json({
+    showForm: {
+      name: 'createExpeditionForm',
+      form: {
+        title: '🗺️ Create New Expedition',
+        description: 'Share a hidden gem or adventure in your city',
+        fields: [
+          {
+            type: 'string',
+            name: 'title',
+            label: 'Title',
+            helpText: 'Give your expedition a catchy name',
+            required: true,
+          },
+          {
+            type: 'paragraph',
+            name: 'description',
+            label: 'Description',
+            helpText: 'What makes this place special?',
+            required: true,
+          },
+          {
+            type: 'image',
+            name: 'photo',
+            label: 'Photo',
+            helpText: 'Upload a photo of this location',
+            required: true,
+          },
+          {
+            type: 'string',
+            name: 'address',
+            label: 'Address',
+            helpText: 'Where is this located?',
+            required: true,
+          },
+          {
+            type: 'select',
+            name: 'city',
+            label: 'City',
+            options: [
+              { label: 'Mumbai', value: 'Mumbai' },
+              { label: 'Delhi', value: 'Delhi' },
+              { label: 'Bengaluru', value: 'Bengaluru' },
+              { label: 'Hyderabad', value: 'Hyderabad' },
+              { label: 'Chennai', value: 'Chennai' },
+              { label: 'Kolkata', value: 'Kolkata' },
+              { label: 'Pune', value: 'Pune' },
+              { label: 'Jaipur', value: 'Jaipur' },
+              { label: 'Goa', value: 'Goa' },
+              { label: 'Ahmedabad', value: 'Ahmedabad' },
+              { label: 'Lucknow', value: 'Lucknow' },
+            ],
+            required: true,
+          },
+          {
+            type: 'select',
+            name: 'tag',
+            label: 'Tag',
+            options: [
+              { label: '🏙️ Urban Exploration', value: 'urban' },
+              { label: '🌳 Nature & Outdoors', value: 'nature' },
+              { label: '🏰 Heritage & Culture', value: 'heritage' },
+              { label: '🍲 Food & Local Eats', value: 'food' },
+              { label: '🎭 Events & Festivals', value: 'events' },
+              { label: '🧩 Hidden Gems', value: 'hidden-gem' },
+              { label: '📸 Insta Spots', value: 'photography' },
+              { label: '🛍️ Markets & Shopping', value: 'shopping' },
+              { label: '🎨 Art & Street Murals', value: 'art' },
+              { label: '🚴 Adventure & Sports', value: 'adventure' },
+              { label: '🌅 Sunrise/Sunset Points', value: 'sunset' },
+              { label: '🕍 Spiritual & Temples', value: 'spiritual' },
+              { label: '🧘 Mindful & Wellness', value: 'wellness' },
+              { label: '💡 Local Legends', value: 'legends' },
+              { label: '🕵️ Mystery Hunt', value: 'mystery' },
+              { label: '❤️ Date Spot', value: 'date' },
+              { label: '🧑‍🤝‍🧑 With Friends', value: 'friends' },
+              { label: '👨‍👩‍👧‍👦 Family Friendly', value: 'family' },
+              { label: '🐾 Pet Friendly', value: 'pet-friendly' },
+              { label: '💸 Budget Friendly', value: 'budget' },
+              { label: '✨ Luxury', value: 'luxury' },
+              { label: '☕ Chill & Coffee', value: 'cafe' },
+              { label: '🌃 Nightlife', value: 'nightlife' },
+              { label: '🚶 Walkable Trail', value: 'trail' },
+              { label: '🏞️ Weekend Getaways', value: 'getaway' },
+              { label: '🚗 Road Trip Stop', value: 'road-trip' },
+            ],
+            required: true,
+          },
+          {
+            type: 'select',
+            name: 'difficulty',
+            label: 'Difficulty',
+            options: [
+              { label: 'Easy (10 pts)', value: 'easy' },
+              { label: 'Medium (20 pts)', value: 'medium' },
+              { label: 'Hard (30 pts)', value: 'hard' },
+            ],
+            defaultValue: ['easy'],
+            required: true,
+          },
+        ],
+        acceptLabel: 'Create Expedition',
+        cancelLabel: 'Cancel',
+      },
+    },
+  });
+});
+
+// Form submission handler
+router.post('/internal/form/create-expedition', async (req, res): Promise<void> => {
+  try {
+    const formData = req.body as {
+      title: string;
+      description: string;
+      photo: string;
+      address: string;
+      city: string[];
+      tag: string[];
+      difficulty: string[];
+    };
+
+    // Extract single values from arrays (select fields return arrays)
+    const city = Array.isArray(formData.city) ? formData.city[0] : formData.city;
+    const tag = Array.isArray(formData.tag) ? formData.tag[0] : formData.tag;
+    const difficulty = Array.isArray(formData.difficulty) ? formData.difficulty[0] : formData.difficulty;
+
+    // Get city coordinates
+    const cityCoords = {
+      Mumbai: { lat: 19.076, lng: 72.8777 },
+      Delhi: { lat: 28.7041, lng: 77.1025 },
+      Bengaluru: { lat: 12.9716, lng: 77.5946 },
+      Hyderabad: { lat: 17.385, lng: 78.4867 },
+      Chennai: { lat: 13.0827, lng: 80.2707 },
+      Kolkata: { lat: 22.5726, lng: 88.3639 },
+      Pune: { lat: 18.5204, lng: 73.8567 },
+      Jaipur: { lat: 26.9124, lng: 75.7873 },
+      Goa: { lat: 15.2993, lng: 74.124 },
+      Ahmedabad: { lat: 23.0225, lng: 72.5714 },
+      Lucknow: { lat: 26.8467, lng: 80.9462 },
+    };
+
+    const coordinates = cityCoords[city as keyof typeof cityCoords] || cityCoords.Mumbai;
+
+    // Get current user
+    const currentUser = await reddit.getCurrentUser();
+    const username = currentUser?.username || 'anonymous';
+
+    // Generate expedition ID
+    const expeditionId = await expeditionsDb.generateExpeditionId();
+
+    // Create complete expedition object
+    const expedition: Expedition = {
+      id: expeditionId,
+      title: formData.title,
+      description: formData.description,
+      location: {
+        address: formData.address,
+        city: city as string,
+        country: 'India',
+        coordinates: {
+          lat: coordinates.lat,
+          lng: coordinates.lng,
+        },
+      },
+      photo: {
+        url: formData.photo, // This is already an i.redd.it URL from the form
+        uploadedAt: new Date().toISOString(),
+      },
+      tag: tag as ExpeditionTag,
+      difficulty: difficulty as ExpeditionDifficulty,
+      status: 'approved', // Auto-approve
+      createdBy: username,
+      createdAt: new Date().toISOString(),
+      approvedAt: new Date().toISOString(),
+      approvedBy: 'system',
+      points: difficulty === 'easy' ? 10 : difficulty === 'medium' ? 20 : 30,
+      completionCount: 0,
+      unlockCount: 0,
+    };
+
+    // Save expedition
+    await expeditionsDb.createExpedition(expedition);
+
+    // Track user creation
+    await usersDb.trackExpeditionCreation(username, expeditionId);
+
+    res.json({
+      showToast: {
+        text: '🎉 Expedition created successfully!',
+        appearance: 'success',
+      },
+    });
+  } catch (error) {
+    console.error('❌ Error creating expedition:', error);
+    res.json({
+      showToast: {
+        text: '❌ Failed to create expedition',
+        appearance: 'error',
+      },
     });
   }
 });
