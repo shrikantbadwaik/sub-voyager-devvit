@@ -171,32 +171,32 @@ export const App = () => {
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
             <option value="">All Tags</option>
-            <option value="urban">🏙️ Urban</option>
-            <option value="nature">🌳 Nature</option>
-            <option value="heritage">🏰 Heritage</option>
-            <option value="food">🍲 Food</option>
-            <option value="events">🎭 Events</option>
+            <option value="urban">🏙️ Urban Exploration</option>
+            <option value="nature">🌳 Nature & Outdoors</option>
+            <option value="heritage">🏰 Heritage & Culture</option>
+            <option value="food">🍲 Food & Local Eats</option>
+            <option value="events">🎭 Events & Festivals</option>
             <option value="hidden-gem">🧩 Hidden Gems</option>
             <option value="photography">📸 Insta Spots</option>
-            <option value="shopping">🛍️ Shopping</option>
-            <option value="art">🎨 Art</option>
-            <option value="adventure">🚴 Adventure</option>
-            <option value="sunset">🌅 Sunset</option>
-            <option value="spiritual">🕍 Spiritual</option>
-            <option value="wellness">🧘 Wellness</option>
-            <option value="legends">💡 Legends</option>
-            <option value="mystery">🕵️ Mystery</option>
-            <option value="date">❤️ Date</option>
-            <option value="friends">🧑‍🤝‍🧑 Friends</option>
-            <option value="family">👨‍👩‍👧‍👦 Family</option>
+            <option value="shopping">🛍️ Markets & Shopping</option>
+            <option value="art">🎨 Art & Street Murals</option>
+            <option value="adventure">🚴 Adventure & Sports</option>
+            <option value="sunset">🌅 Sunrise/Sunset Points</option>
+            <option value="spiritual">🕍 Spiritual & Temples</option>
+            <option value="wellness">🧘 Mindful & Wellness</option>
+            <option value="legends">💡 Local Legends</option>
+            <option value="mystery">🕵️ Mystery Hunt</option>
+            <option value="date">❤️ Date Spot</option>
+            <option value="friends">🧑‍🤝‍🧑 With Friends</option>
+            <option value="family">👨‍👩‍👧‍👦 Family Friendly</option>
             <option value="pet-friendly">🐾 Pet Friendly</option>
-            <option value="budget">💸 Budget</option>
+            <option value="budget">💸 Budget Friendly</option>
             <option value="luxury">✨ Luxury</option>
-            <option value="cafe">☕ Cafe</option>
+            <option value="cafe">☕ Chill & Coffee</option>
             <option value="nightlife">🌃 Nightlife</option>
-            <option value="trail">🚶 Trail</option>
-            <option value="getaway">🏞️ Getaway</option>
-            <option value="road-trip">🚗 Road Trip</option>
+            <option value="trail">🚶 Walkable Trail</option>
+            <option value="getaway">🏞️ Weekend Getaways</option>
+            <option value="road-trip">🚗 Road Trip Stop</option>
           </select>
 
           <button
