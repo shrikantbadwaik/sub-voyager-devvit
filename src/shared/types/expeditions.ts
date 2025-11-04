@@ -1,5 +1,31 @@
 // Expedition Tags/Categories
-export type ExpeditionTag = 'food' | 'photo-spot' | 'culture' | 'walk' | 'nature' | 'hidden-gem';
+export type ExpeditionTag =
+  | 'urban'
+  | 'nature'
+  | 'heritage'
+  | 'food'
+  | 'events'
+  | 'hidden-gem'
+  | 'photography'
+  | 'shopping'
+  | 'art'
+  | 'adventure'
+  | 'sunset'
+  | 'spiritual'
+  | 'wellness'
+  | 'legends'
+  | 'mystery'
+  | 'date'
+  | 'friends'
+  | 'family'
+  | 'pet-friendly'
+  | 'budget'
+  | 'luxury'
+  | 'cafe'
+  | 'nightlife'
+  | 'trail'
+  | 'getaway'
+  | 'road-trip';
 
 // Expedition Difficulty Levels
 export type ExpeditionDifficulty = 'easy' | 'medium' | 'hard';
