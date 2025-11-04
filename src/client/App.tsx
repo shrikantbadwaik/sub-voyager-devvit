@@ -154,19 +154,15 @@ export const App = () => {
             <option value="">All Cities</option>
             <option value="Mumbai">Mumbai</option>
             <option value="Delhi">Delhi</option>
-            <option value="Bangalore">Bangalore</option>
+            <option value="Bengaluru">Bengaluru</option>
             <option value="Hyderabad">Hyderabad</option>
             <option value="Chennai">Chennai</option>
             <option value="Kolkata">Kolkata</option>
             <option value="Pune">Pune</option>
             <option value="Jaipur">Jaipur</option>
-            <option value="Ahmedabad">Ahmedabad</option>
-            <option value="Surat">Surat</option>
-            <option value="Lucknow">Lucknow</option>
-            <option value="Chandigarh">Chandigarh</option>
-            <option value="Indore">Indore</option>
-            <option value="Kochi">Kochi</option>
             <option value="Goa">Goa</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Lucknow">Lucknow</option>
           </select>
 
           <select
@@ -175,12 +171,32 @@ export const App = () => {
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
             <option value="">All Tags</option>
-            <option value="hidden-gem">Hidden Gem</option>
-            <option value="food">Food</option>
-            <option value="photo-spot">Photo Spot</option>
-            <option value="culture">Culture</option>
-            <option value="walk">Walk</option>
-            <option value="nature">Nature</option>
+            <option value="urban">🏙️ Urban</option>
+            <option value="nature">🌳 Nature</option>
+            <option value="heritage">🏰 Heritage</option>
+            <option value="food">🍲 Food</option>
+            <option value="events">🎭 Events</option>
+            <option value="hidden-gem">🧩 Hidden Gems</option>
+            <option value="photography">📸 Insta Spots</option>
+            <option value="shopping">🛍️ Shopping</option>
+            <option value="art">🎨 Art</option>
+            <option value="adventure">🚴 Adventure</option>
+            <option value="sunset">🌅 Sunset</option>
+            <option value="spiritual">🕍 Spiritual</option>
+            <option value="wellness">🧘 Wellness</option>
+            <option value="legends">💡 Legends</option>
+            <option value="mystery">🕵️ Mystery</option>
+            <option value="date">❤️ Date</option>
+            <option value="friends">🧑‍🤝‍🧑 Friends</option>
+            <option value="family">👨‍👩‍👧‍👦 Family</option>
+            <option value="pet-friendly">🐾 Pet Friendly</option>
+            <option value="budget">💸 Budget</option>
+            <option value="luxury">✨ Luxury</option>
+            <option value="cafe">☕ Cafe</option>
+            <option value="nightlife">🌃 Nightlife</option>
+            <option value="trail">🚶 Trail</option>
+            <option value="getaway">🏞️ Getaway</option>
+            <option value="road-trip">🚗 Road Trip</option>
           </select>
 
           <button

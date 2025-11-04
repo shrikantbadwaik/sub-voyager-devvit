@@ -24,8 +24,18 @@
         "location": "subreddit",
         "forUserType": "moderator",
         "endpoint": "/internal/menu/post-create"
+      },
+      {
+        "label": "Create Expedition",
+        "description": "Share a new hidden gem or adventure",
+        "location": "post",
+        "forUserType": "user",
+        "endpoint": "/internal/menu/create-expedition"
       }
     ]
+  },
+  "forms": {
+    "createExpeditionForm": "/internal/form/create-expedition"
   },
   "triggers": {
     "onAppInstall": "/internal/on-app-install"
