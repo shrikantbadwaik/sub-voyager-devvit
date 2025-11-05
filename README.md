@@ -18,27 +18,6 @@
 - 📱 **Responsive Design** - Works seamlessly on desktop and mobile
 - ℹ️ **First-Time Help** - Interactive tutorial for new users
 
-### Coming in v1.0+
-
-- 📍 **Geolocation Verification** - Auto-verify you're actually at the location
-- 🔔 **Proximity Notifications** - Get notified when near unlocked expeditions
-- 🏅 **Enhanced Leaderboards** - Global, city-based, and completion rate rankings
-- ⭐ **Reviews & Ratings** - Rate and review completed expeditions
-- 👥 **Social Features** - Comments, likes, and sharing
-- 🎯 **Challenges & Quests** - Time-limited challenges and streaks
-
-See [PRODUCT_ROADMAP.md](./PRODUCT_ROADMAP.md) for the complete feature roadmap.
-
-## 🏗️ Tech Stack
-
-- **[Devvit](https://developers.reddit.com/)**: Reddit's developer platform for immersive experiences
-- **[React 19](https://react.dev/)**: Modern UI with hooks and concurrent features
-- **[TypeScript](https://www.typescriptlang.org/)**: Full type safety across client and server
-- **[Vite](https://vite.dev/)**: Lightning-fast build tool and dev server
-- **[Express](https://expressjs.com/)**: Backend API server
-- **[Redis](https://redis.io/)**: In-memory data store via Devvit's Redis client
-- **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first styling
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -95,64 +74,6 @@ npm run deploy             # Upload new version to Reddit
 npm run launch             # Publish app for review
 ```
 
-## 📁 Project Structure
-
-```
-sub-voyager/
-├── src/
-│   ├── client/              # React frontend (webview)
-│   │   ├── components/      # UI components
-│   │   │   ├── ExpeditionCard.tsx      # Expedition summary cards
-│   │   │   ├── ExpeditionDetail.tsx    # Full expedition view
-│   │   │   ├── ExpeditionForm.tsx      # Create expedition form
-│   │   │   ├── UserProfile.tsx         # User stats & badges
-│   │   │   └── FirstTimeHelp.tsx       # Tutorial modal
-│   │   ├── hooks/           # React hooks
-│   │   │   ├── useInit.ts             # App initialization
-│   │   │   └── useExpeditions.ts      # Expedition data
-│   │   ├── utils/           # Helper functions
-│   │   │   └── api.ts                 # API client
-│   │   └── App.tsx          # Main app component
-│   │
-│   ├── server/              # Express backend
-│   │   ├── data/            # Redis data layer
-│   │   │   ├── redis-keys.ts         # Key patterns
-│   │   │   ├── expeditions.ts        # Expedition CRUD
-│   │   │   └── users.ts              # User data & leaderboard
-│   │   ├── core/            # Core Devvit logic
-│   │   │   └── post.ts               # Reddit post integration
-│   │   └── index.ts         # Express server & API routes
-│   │
-│   └── shared/              # Shared code
-│       └── types/           # TypeScript types
-│           ├── expeditions.ts        # Core data models
-│           └── api.ts                # API contracts
-│
-├── .github/workflows/       # CI/CD pipelines
-├── dist/                    # Build output
-├── tools/                   # Build configuration
-└── docs/                    # Documentation
-    ├── PRODUCT_ROADMAP.md   # Feature roadmap
-    ├── CI_CD_SETUP.md       # CI/CD documentation
-    ├── SECURITY.md          # Security guidelines
-    └── CHANGELOG.md         # Version history
-```
-
-## 🔌 API Endpoints
-
-| Endpoint                        | Method | Description                               |
-| ------------------------------- | ------ | ----------------------------------------- |
-| `/api/init`                     | GET    | Initialize app, fetch user profile        |
-| `/api/expeditions/create`       | POST   | Create new expedition                     |
-| `/api/expeditions/list`         | GET    | List expeditions (with filters)           |
-| `/api/expeditions/:id`          | GET    | Get expedition details & status           |
-| `/api/expeditions/:id/unlock`   | POST   | Unlock expedition for user                |
-| `/api/expeditions/:id/complete` | POST   | Submit completion with proof              |
-| `/api/user/profile`             | GET    | Get user profile & stats                  |
-| `/api/user/expeditions`         | GET    | Get user's unlocked/completed expeditions |
-
-See [src/server/index.ts](./src/server/index.ts) for full API documentation.
-
 ## 🎮 How It Works
 
 ### For Explorers (Users)
@@ -180,24 +101,6 @@ See [src/server/index.ts](./src/server/index.ts) for full API documentation.
 - **Level 4 (Pro Explorer)**: 500-999 points
 - **Level 5 (Legend)**: 1000+ points
 
-## 🧪 CI/CD
-
-SubVoyager uses GitHub Actions for automated testing and deployment:
-
-- ✅ **Build & Test**: Automated on every push and PR
-- ✅ **Code Quality**: ESLint, Prettier, TypeScript checks
-- ✅ **Security**: npm audit, dependency review
-- ✅ **Staging Deploy**: Auto-deploy to staging on main branch
-- ✅ **Production Deploy**: Manual approval required
-
-See [CI_CD_SETUP.md](./CI_CD_SETUP.md) for complete documentation.
-
-## 🔒 Security
-
-We take security seriously. All dependencies are regularly audited, and we follow best practices for data handling and user privacy.
-
-See [SECURITY.md](./SECURITY.md) for our security policy and vulnerability management.
-
 ## 📝 Contributing
 
 Contributions are welcome! Please follow these guidelines:
@@ -209,13 +112,6 @@ Contributions are welcome! Please follow these guidelines:
 5. Commit your changes (`git commit -m 'Add amazing feature'`)
 6. Push to your branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
-
-### Code Style
-
-- TypeScript for all new code
-- Follow existing patterns in the codebase
-- Run `npm run check` before committing
-- Write meaningful commit messages
 
 ## 📄 License
 
@@ -231,15 +127,6 @@ This project is licensed under the BSD-3-Clause License - see the [LICENSE](./LI
 - **Developer**: Shrikant Badwaik
 - **GitHub**: [@shrikantbadwaik](https://github.com/shrikantbadwaik)
 - **Project Link**: [https://github.com/shrikantbadwaik/sub-voyager](https://github.com/shrikantbadwaik/sub-voyager)
-
-## 🗺️ Roadmap
-
-SubVoyager is actively under development! Check out our [PRODUCT_ROADMAP.md](./PRODUCT_ROADMAP.md) for:
-
-- ✅ Completed MVP features
-- 🚧 In-progress features
-- 📋 Planned enhancements (v1.0, v2.0, v3.0+)
-- 💡 Future ideas and community requests
 
 ---
 
